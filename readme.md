@@ -1,17 +1,29 @@
 # Converting JQM to IONIC
 This doc is to convert an app with JQM (**Jquery mobile**) framework to IONIC.
-Before starting, you will need to install ionic, please refer to [ionic website](https://ionicframework.com/getting-started/) for more detail guide.
+Before starting, you will need to *install ionic, please refer to [https://ionicframework.com/getting-started/](https://ionicframework.com/getting-started/) for more detail guide.*
 
-You also can visit [ionic docs](https://ionicframework.com/docs/) to explore more options about the ionic ui framework and api.
+You also can visit [https://ionicframework.com/docs/](https://ionicframework.com/docs/) to explore more options about the ionic ui framework and api.
 
 # Getting started
-The common thing between JQM and IONIC is that both are using HTML syntax. If you understand HTML, IONIC framework will be quite simple for you.
+Ionic framework is using *HTML* syntax, if you familiar with HTML, it will be easy for you.
 
-After you created a new IONIC project folder, use your code editor and open the ionic folder, under folder:
+After you installed *Ionic*, follow the guide to create a new project with a blank template.
+
+If done, please open your favorite code editor and open the project folder.
+
+Open the *home* folder with the following path:
 ```sh
 src/pages/home
 ```
-will be your home page, with **home.html, home.scss, home.ts**, where html will be your  **Hypertext Markup Language**, scss will be your css and ts will be stand for **typescript** which is similiar to **javascript**.
+This folder will contain your first page of the app. The folder will contain:
+1. home.html 
+2. home.scss
+3. home.ts
+
+The *html* file will the file to write html tag. *Scss* will be the file to style and theming the app. And the *Ts* file will be run the logic of the app with **Angular** syntax (*the latest version now is 4*).
+
+
+I will start by 
 
 ### Header
 IONIC header, is located at the top of the **page.html**, the`<ion-header>` tag.
