@@ -88,6 +88,8 @@ export class MyPage {
  $ ionic generate page second
  ```
 
+[More ionic cli docs](https://ionicframework.com/docs/cli/)
+
  2. Open `app.module.ts` at /src/app.
 ```sh
 import { BrowserModule } from '@angular/platform-browser';
@@ -348,6 +350,7 @@ This is similar to JQM *if else statement*. Pervious example:
 [Angular data binding docs](https://angular.io/guide/displaying-data)
 
 ## Searchbar
+
 **JQM:**
 ```sh
 <ul data-role="listview" data-filter="true" data-filter-placeholder="Search fruits..." data-inset="true">
@@ -452,7 +455,7 @@ home.html:
 
 ```
 
-app.html:
+app.html (/src/app):
 ```sh
 <ion-menu type="overlay" [content]="mycontent">
 <ion-header>
@@ -474,5 +477,7 @@ app.html:
 ```
 
 [Ionic menu api docs](https://ionicframework.com/docs/api/components/menu/Menu/)
+
+
 
 

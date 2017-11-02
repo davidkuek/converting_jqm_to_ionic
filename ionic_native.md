@@ -1,5 +1,8 @@
- ## Sqlite database
- JQM:
+# Ionic Native
+Usage of phone functions, please have cordova installed before proceed. 
+
+## Sqlite database
+**JQM:**
  ```sh
 var dbName = 'Testdb';
 var dbVersion = '1.0';
@@ -46,15 +49,16 @@ var query = "SELECT * FROM ITEM_LIST;";
 }
  ```
  
- Ionic:
+**Ionic:**
+
  1.  Install plugin
  ```sh
 $ ionic cordova plugin add cordova-sqlite-storage
 $ npm install --save @ionic-native/sqlite
  ```
  
- 2. Import into app.module.ts
- ```sh
+ 2. app.module.ts
+```sh
  ...
 
 import { SQLite } from '@ionic-native/sqlite';
@@ -74,7 +78,7 @@ import { SQLite } from '@ionic-native/sqlite';
 export class AppModule { }
 ```
 
-3. Import to home.ts
+3. home.ts
 ```sh
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
@@ -142,9 +146,15 @@ this.sqlite.create({
   }
 ```
  
+*Note: Sqlite in Ionic is not websql in JQM, therefore is not viewable in debug tools.*
+*Note: Sqlite usage might not work in `ionic serve`, therefore view on device instead.*
+
 ## Cordova Camera
-JQM:
+**JQM:**
 ```sh
+<img src="" id="imageFile">
+
+<script>
 function setOptions(srcType) {
     var options = {
         // Some common settings are 20, 50, and 100
@@ -195,16 +205,17 @@ function displayImage(imageUri) {
     var elem = document.getElementById('imageFile');
     elem.src = imageUri;
 }
+</script>
 ```
 
-Ionic:
+**Ionic:**
 1. Install the camera plugin.
 ```sh
 $ ionic cordova plugin add cordova-plugin-camera
 $ npm install --save @ionic-native/camera
 ```
 
-2. Add this to app.module.ts
+2. app.module.ts
 ```sh
 ...
 
@@ -226,14 +237,21 @@ export class AppModule { }
 
 ```
 
-3. In home.ts:
+2. home.html
+```sh
+  <ion-content padding>
+    <img src="{{imageFile}}">
+  </ion-content>
+```
+
+3. home.ts:
 ```sh
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Injectable()
 export class DatabaseProvider {
 
-image: any;
+imageFile: any;
 
 constructor(private camera: Camera) { }
 
@@ -250,7 +268,7 @@ constructor(private camera: Camera) { }
 
 openCamera(){
 this.camera.getPicture(this.options).then((imageUri) => {
- this.image = imageUri; 
+ this.imageFile = imageUri; 
 
 }, (err) => {
  
@@ -262,10 +280,11 @@ openLibrary(){
   var options = {
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
     destinationType: this.camera.DestinationType.DATA_URL,
+    // use data_url instead of file_uri for image display from library
     mediaType: this.camera.MediaType.PICTURE
   };
   this.camera.getPicture(options).then((imageData) =>{
-  this.image= 'data:image/jpeg;base64,' + imageData;
+  this.imageFile = 'data:image/jpeg;base64,' + imageData;
 
   },
   (err) =>{
@@ -274,3 +293,8 @@ openLibrary(){
 }
 }
 ```
+
+[Ionic camera docs](https://ionicframework.com/docs/native/camera/)
+
+## File
+**JQM:**

@@ -7,6 +7,7 @@ This readme is for noting down the steps to convert a JQM project to Ionic.
    - [Cordova](https://cordova.apache.org/#getstarted)
    - [Ionic v3](https://ionicframework.com/getting-started/)
 2. [Angular v4](https://angular.io/) for your reference of angularjs concept and syntax.
+3. Ensure your code editor has **Typescript** package installed.
 
 ## After started
 After installed Ionic,
