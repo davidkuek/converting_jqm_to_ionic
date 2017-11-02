@@ -12,6 +12,7 @@ function popAlert(){
 ```
 
 **Ionic:**
+
 home.html
 ```sh
 <button ion-button (click)="popAlert()">Button</button>
@@ -60,7 +61,7 @@ export class MyPage {
 
 **JQM:**
 ```sh
-<a href="#second-page" class="ui-btn-right">Next page</a>
+<a href="#second-page" class="ui-btn">Next page</a>
 
 <!-- Second page -->
 <div data-role="page" id="second-page" >
@@ -81,6 +82,7 @@ export class MyPage {
  ```
  
 **Ionic:**
+
  1. Run on terminal inside your directory:
  ```sh
  $ ionic generate page second
@@ -125,7 +127,7 @@ export class AppModule {}
 
  3. Create onclick function on a button.
  ```sh
- <button ion-button icon-only (click)="secondPage()">
+ <button ion-button icon-only (click)="nextPage()">Next Page</button>
  ```
  4. On `home.ts`:
 ```sh
@@ -144,7 +146,7 @@ export class HomePage {
   }
   
   // assign navCtrl to the onclick function
-  secondPage(){
+  nextPage(){
   this.navCtrl.push(SecondPage);
   }
 }
@@ -160,21 +162,22 @@ In JQM, this often refer to `append` or `$()`, however Ionic makes it more effic
 
 **JQM:**
 ```sh
-   <h1 id="fruit-topic">< -- Adding title --></h1>
-   <h2>< -- Adding sub title --></h2>
+   <h1 id="fruit-topic"></h1>
+   <h2 id="fruit-subtopic"></h2>
    
       <ul id ="fruit-list">
-         < -- To add the data here we can use append method -->
+         
       </ul>
       <p>There are many more!</p>
+      
       <script>
       $( document ).ready(function() {
          var title = "My favourite Fruit";
          var fruit = ["Durian", "Apple", "Orange", "Watermelon", "Grape"];
-         var subtitle = "My top favourite fruit is " + fruit[0];
-         $('#fruit-topic h1').append(title);
-         $('#fruit-topic h2').append(subtitle);
-         $('#fruit-topic ul').append("<li>" + fruit[0] + "</li>" + 
+         var subtitle = "My top favourite fruit is " + fruit[0] + "!";
+         $('#fruit-topic').append(title);
+         $('#fruit-subtopic').append(subtitle);
+         $('#fruit-list').append("<li>" + fruit[0] + "</li>" + 
                                  "<li>" + fruit[1] + "</li>" +
                                  "<li>" + fruit[2] + "</li>" +
                                  "<li>" + fruit[3] + "</li>" +
@@ -185,18 +188,19 @@ In JQM, this often refer to `append` or `$()`, however Ionic makes it more effic
 ```
 
 **Ionic:**
-On `home.html`,insert:
+
+On `home.html`:
 ```sh
 <ion-content>
-   <h1>My Favourite Fruit</h1>
-   <h2>My top favourite is durian!</h2>
+   <h1>{{title}}</h1>
+   <h2>My top favourite is {{favFruit}}!</h2>
    
       <ul>
-      <li>Durian</li>
-      <li>Apple</li>
-      <li>Orange</li>
-      <li>Watermelon</li>
-      <li>Grape</li>
+      <li>{{fruits[0]}}</li>
+      <li>{{fruits[1]}}</li>
+      <li>{{fruits[2]}}</li>
+      <li>{{fruits[3]}}</li>
+      <li>{{fruits[4]}}</li>
       </ul>
       <p>There are many more!</p>
    
@@ -207,7 +211,6 @@ In your `home.ts`:
  ```sh
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { SecondPage } from '../second/second'; 
 
 @Component({
   selector: 'page-home',
@@ -217,7 +220,7 @@ export class HomePage {
 // add this
 title = 'My Favourite Fruit';
 fruits = ['Durian', 'Apple', 'Orange', 'Watermelon', 'Grape'];
-favFruit = this.fruit[0];
+favFruit = this.fruits[0];
 
   constructor(public navCtrl: NavController) {
 
@@ -227,24 +230,6 @@ favFruit = this.fruit[0];
 }
  ```
 
-Now change your `home.html`:
-```sh
-<ion-content>
-   <h1>{{title}}</h1>
-   <h2>My top favourite is {{favFruit}}!</h2>
-   
-      <ul>
-      <li>{{fruit[0]}}</li>
-      <li>{{fruit[1]}}</li>
-      <li>{{fruit[2]}}</li>
-      <li>{{fruit[3]}}</li>
-      <li>{{fruit[4]}}</li>
-      </ul>
-      <p>There are many more!</p>
-   
-</ion-content>
-```
-*The output will be the same as before data binding.* 
 
 ### ngFor
 ngFor is a method to loop through your data in your `.html`.
@@ -253,21 +238,22 @@ For JQM will refer as `for loop`, example from pervious:
 **JQM:**
 ```sh
    <h1 id="fruit-topic"></h1>
-   <h2></h2>
+   <h2 id="fruit-subtopic"></h2>
    
       <ul id ="fruit-list">
-         < -- To add the data here we can use append method -->
+         
       </ul>
       <p>There are many more!</p>
+      
       <script>
       $( document ).ready(function() {
          var title = "My favourite Fruit";
          var fruit = ["Durian", "Apple", "Orange", "Watermelon", "Grape"];
-         var subtitle = "My top favourite fruit is " + fruit[0];
-         $('#fruit-topic h1').append(title);
-         $('#fruit-topic h2').append(subtitle);
+         var subtitle = "My top favourite fruit is " + fruit[0] + "!";
+         $('#fruit-topic').append(title);
+         $('#fruit-subtopic').append(subtitle);
          for(var i = 0; i< fruit.length; i++){
-            $('#fruit-topic ul').append("<li>" + fruit[i] + "</li>");
+            $('#fruit-list').append("<li>" + fruit[i] + "</li>");
          }
       });
 
@@ -315,29 +301,31 @@ This is similar to JQM *if else statement*. Pervious example:
 **JQM:**
 ```sh
    <h1 id="fruit-topic"></h1>
-   <h2></h2>
+   <h2 id="fruit-subtopic"></h2>
    
       <ul id ="fruit-list">
-         < -- To add the data here we can use append method -->
+         
       </ul>
-      <p></p>
+      <p id="fruit-paragraph"></p>
+      
+      <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
       <script>
       $( document ).ready(function() {
          var title = "My favourite Fruit";
          var fruit = ["Durian", "Apple", "Orange", "Watermelon", "Grape"];
-         var subtitle = "My top favourite fruit is " + fruit[0];
-         $('#fruit-topic h1').append(title);
-         $('#fruit-topic h2').append(subtitle);
-         
+         var subtitle = "My top favourite fruit is " + fruit[0] + "!";
+         $('#fruit-topic').append(title);
+         $('#fruit-subtopic').append(subtitle);
          for(var i = 0; i< fruit.length; i++){
-            $('#fruit-topic ul').append("<li>" + fruit[i] + "</li>");
+            $('#fruit-list').append("<li>" + fruit[i] + "</li>");
          }
-         
+
          if(fruit.length>3){
-         $('#fruit-topic p').append("There are many more!");  
+         $('#fruit-paragraph').append("There are many more!");  
          }
-         
       });
+
+      </script>
 ```
    
 **Ionic:**
@@ -424,8 +412,67 @@ fruits = [];
 }
 ```
  
+[Ionic searchbar component](https://ionicframework.com/docs/components/#searchbar)
+[Ionic searchbar api](https://ionicframework.com/docs/api/components/searchbar/Searchbar/)
 
 ## Menu
 **JQM:**
+```sh
+<div data-role="page">
+  <div data-role="header">
+    <a href="#mypanel" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars"></a>
+  </div>
+    <div data-role="panel" id="mypanel" data-display="overlay">
+      <div data-role="header">
+          <h1>Menu</h1>
+      </div>
+        <p>Menu Content</p>
+    </div>
+</div>
+```
 
- 
+**Ionic:**
+
+home.html:
+```sh
+<ion-header>
+  <ion-navbar>
+     <button ion-button icon-left menuToggle>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+</ion-content>
+
+```
+
+app.html:
+```sh
+<ion-menu type="overlay" [content]="mycontent">
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Menu
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+  <ion-content padding>
+    <ion-list>
+      <p>Menu content</p>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>
+```
+
+[Ionic menu api docs](https://ionicframework.com/docs/api/components/menu/Menu/)
+
+
