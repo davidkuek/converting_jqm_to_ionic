@@ -1,5 +1,5 @@
-## The UI component
-### The Header
+# The UI component
+## The Header
 To start with a header, copy the content from `<div data-role="header">Page Name</div>` tag from your **JQM** project.
 And replace the content in `<ion-title>` tag in home.html. Example:
 
@@ -72,7 +72,7 @@ In your Ionic project, add `<ion-buttons>`, `<button>` and `<ion-icon>` tags ins
 [Ionic Header Docs](https://ionicframework.com/docs/api/components/toolbar/Header/)
 [Ionic scss Theming Docs](https://ionicframework.com/docs/theming/theming-your-app/)
 
-### Footer
+## Footer
 For footer, copy the content inside `<div data-role="footer"></div>` from your **JQM** project.
 And add `<ion-footer>` below the `<ion-content>` tag in your Ionic project, example:
 
@@ -95,7 +95,7 @@ And add `<ion-footer>` below the `<ion-content>` tag in your Ionic project, exam
 
 [Ionic Footer Docs](https://ionicframework.com/docs/api/components/toolbar/Footer/)
 
-### Buttons
+## Buttons
 **JQM**: 
 ```sh
 <a href="#" class="ui-btn">Button</a>
@@ -109,7 +109,7 @@ And add `<ion-footer>` below the `<ion-content>` tag in your Ionic project, exam
 
 [Ionic button docs](https://ionicframework.com/docs/components/#buttons)
 
-### Lists
+## Lists
 **JQM**
 ```sh
 <ul data-role="listview">
@@ -135,7 +135,7 @@ And add `<ion-footer>` below the `<ion-content>` tag in your Ionic project, exam
 [Ionic list](https://ionicframework.com/docs/components/#lists)
 
 
-### Inputs
+## Inputs
 **JQM**:
 ```sh
 <label for="text-basic">Username:</label>
@@ -165,7 +165,7 @@ And add `<ion-footer>` below the `<ion-content>` tag in your Ionic project, exam
 [Ionic input docs](https://ionicframework.com/docs/components/#inputs)
 
 
-### Radio
+## Radio
 **JQM**:
 ```sh
 <fieldset data-role="controlgroup">
