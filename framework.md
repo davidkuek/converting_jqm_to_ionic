@@ -1,16 +1,16 @@
 ## The UI component
 ### The Header
-To start with a header, copy the content from `<div data-role="header">Page Name</div>` tag from your JQM project.
+To start with a header, copy the content from `<div data-role="header">Page Name</div>` tag from your **JQM** project.
 And replace the content in `<ion-title>` tag in home.html. Example:
 
-JQM:
+**JQM**:
 ```sh
 <div data-role="header">
   <h1>Copy this</h1>
     </div>
 ```
 
-Ionic:
+**Ionic:**
 ```sh
 <ion-header>
   <ion-navbar>
@@ -48,12 +48,12 @@ $colors: (
 To add **icon button** to your header, copy content from `<a>` tag inside the *div header* parent tag.
 In your Ionic project, add `<ion-buttons>`, `<button>` and `<ion-icon>` tags inside your `<ion-navbar>` tag, example:
 
-JQM:
+**JQM**:
 ```sh
 <a href="#" data-icon="plus" class="ui-btn-right"></a>
 ```
 
-Ionic:
+**Ionic:**
 ```sh
 <ion-header>
   <ion-navbar color="primary">
@@ -73,16 +73,16 @@ Ionic:
 [Ionic scss Theming Docs](https://ionicframework.com/docs/theming/theming-your-app/)
 
 ### Footer
-For footer, copy the content inside `<div data-role="footer"></div>` from your JQM project.
+For footer, copy the content inside `<div data-role="footer"></div>` from your **JQM** project.
 And add `<ion-footer>` below the `<ion-content>` tag in your Ionic project, example:
 
-JQM:
+**JQM**:
 ```sh
 <div data-role="footer">
 <h1>Footer</h1>
 </div>
 ```
-Ionic:
+**Ionic:**
 ```sh
 <ion-content></ion-content>
 
@@ -96,13 +96,13 @@ Ionic:
 [Ionic Footer Docs](https://ionicframework.com/docs/api/components/toolbar/Footer/)
 
 ### Buttons
-JQM: 
+**JQM**: 
 ```sh
 <a href="#" class="ui-btn">Button</a>
 <button class="ui-btn">Button</button>
 ```
 
-Ionic:
+**Ionic:**
 ```sh
 <button ion-button>Button</button>
 ```
@@ -110,7 +110,7 @@ Ionic:
 [Ionic button docs](https://ionicframework.com/docs/components/#buttons)
 
 ### Lists
-JQM
+**JQM**
 ```sh
 <ul data-role="listview">
     <li><a href="#">Acura</a></li>
@@ -121,7 +121,7 @@ JQM
 </ul>
 ```
 
-Ionic:
+**Ionic:**
 ```sh
 <ion-list>
   <button ion-item>Acura</button>  
@@ -136,7 +136,7 @@ Ionic:
 
 
 ### Inputs
-JQM:
+**JQM**:
 ```sh
 <label for="text-basic">Username:</label>
 <input name="text-basic" id="text-basic" value="" type="text">
@@ -145,7 +145,7 @@ JQM:
 <input name="password" id="password" value="" autocomplete="off" type="password">
 ```
 
-Ionic:
+**Ionic:**
 ```sh
 <ion-list>
 
@@ -166,7 +166,7 @@ Ionic:
 
 
 ### Radio
-JQM:
+**JQM**:
 ```sh
 <fieldset data-role="controlgroup">
     <legend>Radio buttons, vertical controlgroup:</legend>
@@ -181,7 +181,7 @@ JQM:
 </fieldset>
 ```
 
-Ionic:
+**Ionic:**
 ```sh
 <ion-list radio-group>
   <ion-list-header>
