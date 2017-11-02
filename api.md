@@ -1,19 +1,92 @@
 
- 
+# Api 
+## Basic alert
+**JQM:**
+```sh
+<button onclick="popAlert()">Alert</button>
+<script>
+function popAlert(){
+  alert('New alert!');
+}
+</script>
+```
+
+**Ionic:**
+home.html
+```sh
+<button ion-button (click)="popAlert()">Button</button>
+```
+
+home.ts
+```sh
+import { AlertController } from 'ionic-angular';
+
+export class MyPage {
+  constructor(public alertCtrl: AlertController) {
+  }
+
+  popAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Alert',
+      subTitle: 'New Alert!',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+}
+```
+
+[Ionic alert docs](https://ionicframework.com/docs/components/#alert)
+
+
+## Datepicker
+**JQM:**
+```sh
+<input data-role="date" data-inline="true" type="text">
+```
+
+**Ionic:**
+```sh
+<ion-item>
+  <ion-label>Date</ion-label>
+  <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+</ion-item>
+```
+
+[Ionic datepicker docs](https://ionicframework.com/docs/api/components/datetime/DateTime/)
+
+
 ## Creating a new page
 
-JQM:
+**JQM:**
 ```sh
-<a href="#second-page" data-icon="plus" class="ui-btn-right"></a>
+<a href="#second-page" class="ui-btn-right">Next page</a>
+
+<!-- Second page -->
+<div data-role="page" id="second-page" >
+</div>
+ ```
+ or
+ ```sh
+ <button ion-button onclick="nextPage()">Next Page</button>
+
+ <!-- Second page -->
+<div data-role="page" id="second-page" >
+
+ <script>
+ function nextPage(){
+  $.mobile.navigate( "#second-page" );
+ }
+ </script>
  ```
  
- Ionic:
- 1. Run on this command at your project directory
+**Ionic:**
+ 1. Run on terminal inside your directory:
  ```sh
  $ ionic generate page second
  ```
 
- 2. After page successfully generated, open `app.module.ts` in the app folder at `/src/app`, and add:
+ 2. Open `app.module.ts` at /src/app.
 ```sh
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -50,7 +123,7 @@ import { SecondPage } from '../pages/second/second' // import in here
 export class AppModule {}
  ```
 
- 3. After import in `app.module.ts`, create a onclick function to the button icon on the header we created just now.
+ 3. Create onclick function on a button.
  ```sh
  <button ion-button icon-only (click)="secondPage()">
  ```
@@ -80,11 +153,12 @@ export class HomePage {
  
   - [Ionic nav docs](https://ionicframework.com/docs/components/#navigation)
  
+
 ## Data Binding
 Angularjs offer a fundamental called data binding which allows you to bind data from **.ts** to **.html**.
 In JQM, this often refer to `append` or `$()`, however Ionic makes it more efficent and code saving, example:
 
-JQM:
+**JQM:**
 ```sh
    <h1 id="fruit-topic">< -- Adding title --></h1>
    <h2>< -- Adding sub title --></h2>
@@ -110,7 +184,7 @@ JQM:
       </script>
 ```
 
-Ionic:
+**Ionic:**
 On `home.html`,insert:
 ```sh
 <ion-content>
@@ -176,7 +250,7 @@ Now change your `home.html`:
 ngFor is a method to loop through your data in your `.html`.
 For JQM will refer as `for loop`, example from pervious:
 
-JQM:
+**JQM:**
 ```sh
    <h1 id="fruit-topic"></h1>
    <h2></h2>
@@ -200,7 +274,7 @@ JQM:
       </script>
 ```
 
-Ionic:
+**Ionic:**
 ```sh
 <ion-content>
    <h1>{{title}}</h1>
@@ -238,7 +312,7 @@ Change it to:
 ngIf is a method to display a view or a portion of a view only under specific circumstances.
 This is similar to JQM *if else statement*. Pervious example:
 
-JQM:
+**JQM:**
 ```sh
    <h1 id="fruit-topic"></h1>
    <h2></h2>
@@ -266,7 +340,7 @@ JQM:
       });
 ```
    
-Ionic:
+**Ionic:**
 ```sh
 <ion-content>
    <h1>{{title}}</h1>
@@ -281,288 +355,77 @@ Ionic:
 
 </ion-content>
 ```
-*This tells the view to display the paragraph if there more than 3 items in the fruits array data. *
+*This tells the view to display the paragraph if there more than 3 items in the fruits array data.*
 
-### ngModel
-ngModel is method to send data from the `.ts` file to `.html`.
+[Angular data binding docs](https://angular.io/guide/displaying-data)
 
- - [Angular data binding docs](https://angular.io/guide/displaying-data)
- 
-
- 
- ## Sqlite database
- JQM:
- ```sh
-var dbName = 'Testdb';
-var dbVersion = '1.0';
-var dbDisplayName = 'Test DB';
-var dbSize = 2*1024*1024;
-var item_list = []; 
-
- function createDatabase(){
-    var db = openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
-    db.transaction(function(tx) {
-         var query = 'CREATE TABLE IF NOT EXISTS ITEM_LIST ' +  
-                     '([id] INTEGER PRIMARY KEY AUTOINCREMENT, [name] TEXT,[desc] TEXT);';
-            tx.executeSql(query)
-         },
-         function(err){
-            console.log('create database error ' + err)
-            });
- }
- 
- function displayItemList(){
-var query = "SELECT * FROM ITEM_LIST;";
-    db = openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
-    db.transaction(function (tx){
-        tx.executeSql(query,[],
-            function(tx,results){
-                if (results.rows.length > 0) {
-                    for(var i=0; i < results.rows.length; i++){
-                        item_list[i] = [];
-                        item_list[i][0] = results.rows.item(i).id;
-                        item_list[i][1] = results.rows.item(i).name;
-                        item_list[i][2] = results.rows.item(i).desc;
-                            
-                    }
-            }               
-            },
-            function(err){
-                console.log('display item list error ' + err);
-            });
-    },function(err){
-        console.log('Open database error' + err);
-    });
-
-
-}
- ```
- 
- Ionic:
- 1.  Install plugin
- ```sh
-$ ionic cordova plugin add cordova-sqlite-storage
-$ npm install --save @ionic-native/sqlite
- ```
- 
- 2. Import into app.module.ts
- ```sh
- ...
-
-import { SQLite } from '@ionic-native/sqlite';
-
-...
-
-@NgModule({
-  ...
-
-  providers: [
-    ...
-    SQLite
-    ...
-  ]
-  ...
-})
-export class AppModule { }
+## Searchbar
+**JQM:**
+```sh
+<ul data-role="listview" data-filter="true" data-filter-placeholder="Search fruits..." data-inset="true">
+    <li><a href="#">Apple</a></li>
+    <li><a href="#">Banana</a></li>
+    <li><a href="#">Cherry</a></li>
+    <li><a href="#">Cranberry</a></li>
+    <li><a href="#">Grape</a></li>
+    <li><a href="#">Orange</a></li>
+</ul>
 ```
 
-3. Import to home.ts
+**Ionic:**
+home.html
 ```sh
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+<ion-list>
+  <ion-item *ngFor="let fruit of fruits">
+    {{ fruit }}
+  </ion-item>
+</ion-list>
+```
 
-@Injectable()
-export class DatabaseProvider {
-
-item_list = [];
-
-
-constructor(private sqlite: SQLite) { }
-
-...
-
-createDatabase(){
-this.sqlite.create({
-  name: 'Test.db',
-  location: 'default'
+home.ts
+```sh
+@Component({
+  templateUrl: 'search/template.html',
 })
-  .then((db: SQLiteObject) => {
-   
-   let query = 'CREATE TABLE IF NOT EXISTS ITEM_LIST ' +  
-               '([id] INTEGER PRIMARY KEY AUTOINCREMENT, [name] TEXT,[desc] TEXT);';
-   
-    db.executeSql(query, [])
-      .then(() => console.log('Executed SQL'))
-      .catch(e => console.log('execute sql error ') + e);
+class SearchPage {
 
-  })
-  .catch(e => console.log('sqlite create ' + e));
+fruits = [];
+
+  constructor() {
+    this.initializeItems();
   }
 
+  initializeItems() {
+    this.fruits = [
+      'Apple',
+      'Banana',
+      'Cherry',
+      'Cranberry',
+      'Grape',
+      'Orange'
+    ];
+  }
 
-  displayDatabase(){
-  // you have to use create method again to check whether the database is created
-      this.sqlite.create({
-        name: 'Test.db',
-        location: 'default'
+  getItems(ev: any) {
+    // Reset items back to all of the items
+    this.initializeItems();
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.fruits = this.fruits.filter((item) => {
+        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
-      .then((db: SQLiteObject) => {
-
-          let output = [];
-          let query = "SELECT * FROM ITEM_LIST;";
-          db.executeSql(query,[])
-          .then((results) => {
-
-             if (results.rows.length > 0) {
-                for (var i = 0; i < results.rows.length; i++) {
-          
-                        item_list[i] = [];
-                        item_list[i][0] = results.rows.item(i).id;
-                        item_list[i][1] = results.rows.item(i).name;
-                        item_list[i][2] = results.rows.item(i).desc;
-                 }
-              }
-    
-           },(error) =>{
-             console.log('Execute sql ' + error);
-   })
-   
-       })
-   .catch(e => console.error('Open database error ' + e));
-
-  }
-  
-  }
-```
- 
-## Cordova Camera
-JQM:
-```sh
-function setOptions(srcType) {
-    var options = {
-        // Some common settings are 20, 50, and 100
-        quality: 50,
-        destinationType: Camera.DestinationType.FILE_URI,
-        sourceType: srcType,
-        encodingType: Camera.EncodingType.JPEG,
-        mediaType: Camera.MediaType.PICTURE,
-        allowEdit: false,
-        correctOrientation: true
     }
-    return options;
-}
-
-function openCamera(selection) {
-
-    var srcType = Camera.PictureSourceType.CAMERA;
-    var options = setOptions(srcType);
-
-    navigator.camera.getPicture(function cameraSuccess(imageUri) {
-
-        displayImage(imageUri);
-        
-    }, function cameraError(error) {
-        console.log('camera '+error);
-
-    }, options);
-}
-
-
-function openLibrary(selection) {
-
-    var srcType = Camera.PictureSourceType.SAVEDPHOTOALBUM;
-    var options = setOptions(srcType);
-
-    navigator.camera.getPicture(function cameraSuccess(imageUri) {
-
-        displayImage(imageUri);
-
-    }, function cameraError(error) {
-        console.log('open image ' + error);
-
-    }, options);
-}
-
-function displayImage(imageUri) {
-
-    var elem = document.getElementById('imageFile');
-    elem.src = imageUri;
+  }
 }
 ```
-
-Ionic:
-1. Install the camera plugin.
-```sh
-$ ionic cordova plugin add cordova-plugin-camera
-$ npm install --save @ionic-native/camera
-```
-
-2. Add this to app.module.ts
-```sh
-...
-
-import { Camera } from '@ionic-native/camera';
-
-...
-
-@NgModule({
-  ...
-
-  providers: [
-    ...
-    Camera
-    ...
-  ]
-  ...
-})
-export class AppModule { }
-
-```
-
-3. In home.ts:
-```sh
-import { Camera, CameraOptions } from '@ionic-native/camera';
-
-@Injectable()
-export class DatabaseProvider {
-
-image: any;
-
-constructor(private camera: Camera) { }
-
-...
- options: CameraOptions = {
-  quality: 100,
-  destinationType: this.camera.DestinationType.FILE_URI,
-  encodingType: this.camera.EncodingType.JPEG,
-  mediaType: this.camera.MediaType.PICTURE,
-  sourceType: this.camera.PictureSourceType.CAMERA,
-  correctOrientation: true
-}
-
-
-openCamera(){
-this.camera.getPicture(this.options).then((imageUri) => {
- this.image = imageUri; 
-
-}, (err) => {
  
- console.log('take photo error ') + err;
-});
-}
 
-openLibrary(){
-  var options = {
-    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    mediaType: this.camera.MediaType.PICTURE
-  };
-  this.camera.getPicture(options).then((imageData) =>{
-  this.image= 'data:image/jpeg;base64,' + imageData;
+## Menu
+**JQM:**
 
-  },
-  (err) =>{
-    console.log('Open photo library error') + err;
-  });
-}
-}
-```
+ 
