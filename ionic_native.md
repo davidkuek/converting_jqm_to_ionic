@@ -51,13 +51,13 @@ var query = "SELECT * FROM ITEM_LIST;";
  
 **Ionic:**
 
- 1.  Install plugin
+Install plugin:
  ```sh
 $ ionic cordova plugin add cordova-sqlite-storage
 $ npm install --save @ionic-native/sqlite
  ```
  
- 2. app.module.ts
+app.module.ts:
 ```sh
  ...
 
@@ -78,7 +78,7 @@ import { SQLite } from '@ionic-native/sqlite';
 export class AppModule { }
 ```
 
-3. home.ts
+home.ts:
 ```sh
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
@@ -147,7 +147,8 @@ this.sqlite.create({
 ```
  
 *Note: Sqlite in Ionic is not websql in JQM, therefore is not viewable in debug tools.*
-*Note: Sqlite usage might not work in `ionic serve`, therefore view on device instead.*
+
+*Note: Sqlite usage cause your app not viewable with `ionic serve`, therefore view your app device instead.*
 
 ## Cordova Camera
 **JQM:**
@@ -209,13 +210,13 @@ function displayImage(imageUri) {
 ```
 
 **Ionic:**
-1. Install the camera plugin.
+Install the camera plugin:
 ```sh
 $ ionic cordova plugin add cordova-plugin-camera
 $ npm install --save @ionic-native/camera
 ```
 
-2. app.module.ts
+app.module.ts:
 ```sh
 ...
 
@@ -237,14 +238,14 @@ export class AppModule { }
 
 ```
 
-2. home.html
+home.html:
 ```sh
   <ion-content padding>
     <img src="{{imageFile}}">
   </ion-content>
 ```
 
-3. home.ts:
+home.ts:
 ```sh
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
@@ -298,3 +299,44 @@ openLibrary(){
 
 ## File
 **JQM:**
+
+*Creating a new persistent file*
+```sh
+window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+    console.log('file system open: ' + fs.name);
+    fs.root.getFile("newPersistentFile.txt", { create: true, exclusive: false }, function (fileEntry) {
+
+        console.log("fileEntry is file?" + fileEntry.isFile.toString());
+        // fileEntry.name == 'someFile.txt'
+        // fileEntry.fullPath == '/someFile.txt'
+        writeFile(fileEntry, null);
+
+    }, onErrorCreateFile);
+
+}, onErrorLoadFs);
+
+```
+
+*Creating a new temporary file*
+```sh
+window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (fs) {
+
+    console.log('file system open: ' + fs.name);
+    createFile(fs.root, "newTempFile.txt", false);
+
+}, onErrorLoadFs);
+
+
+function createFile(dirEntry, fileName, isAppend) {
+    // Creates a new file or returns the file if it already exists.
+    dirEntry.getFile(fileName, {create: true, exclusive: false}, function(fileEntry) {
+
+        writeFile(fileEntry, null, isAppend);
+
+    }, onErrorCreateFile);
+
+}
+
+
+```
