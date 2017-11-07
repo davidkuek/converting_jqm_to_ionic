@@ -17,70 +17,71 @@ var query = 'CREATE TABLE IF NOT EXISTS ITEM_LIST ' +
             '([id] INTEGER PRIMARY KEY AUTOINCREMENT, [name] TEXT,[desc] TEXT);';
 
     db.transaction(function(tx){
+
         tx.executeSql(query, [],function(tx,result){
+
             console.log('executed Sql:' + result);
-        },function(err){
-            console.log('SQL executed error ' + err);
-        });
-    },
-    function(err){
-      console.log('create database error ' + err)
-    });
+
+        },sqlError);
+
+    },dbError);
+
 }
  
 
 function updateItem(id,name,desc){
-    var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
-  var query = 'UPDATE ITEM_LIST SET NAME = ?, DESC = ? WHERE ID = ?;';
+var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
+var query = 'UPDATE ITEM_LIST SET NAME = ?, DESC = ? WHERE ID = ?;';
 
     db.transaction(function(tx){
+
         tx.executeSql(query,[name,desc,id],function(tx,result){
-            console.log('executed sql:' + result)
-        },function(err){
-            console.log('SQL executed error ' + err);
-        })
-    },
-    function(err){
-      console.log('update item error ' + err)
-    });  
+
+            console.log('executed sql:' + result);
+
+        },sqlError);
+
+    },dbError);  
+
 }
 
+
 function deleteItem(id){
-    var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
-  var query = 'DELETE FROM ITEM_LIST WHERE ID =?;';
+var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
+var query = 'DELETE FROM ITEM_LIST WHERE ID =?;';
 
     db.transaction(function(tx){
+
         tx.executeSql(query,[id],function(tx,result){
+
             console.log('executed sql ' + result);
-        },function(err){
-            console.log('SQL executed error ' + err);
-        })
-    },
-    function(err){
-      console.log('delete item error ' + err)
-    });  
+
+        },sqlError);
+
+    },dbError);  
+
 }
 
 
 function addItem(name,desc){
 var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
-  var query = 'INSERT INTO ITEM_LIST(name,desc) VALUES (?,?);';
+var query = 'INSERT INTO ITEM_LIST(name,desc) VALUES (?,?);';
 
     db.transaction(function(tx){
+
         tx.executeSql(query,[name,desc],function(tx,result){
+
             console.log('executed sql ' + result);
-        },function(err){
-            console.log('SQL executed error' + err);
-        })
-    },
-    function(err){
-      console.log('add item error ' + err)
-    });  
+
+        },sqlError);
+
+    },dbError);  
+
 }
 
 
  function displayItemList(){
-    var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
+var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
 var query = "SELECT * FROM ITEM_LIST;";
     db.transaction(function (tx){
         tx.executeSql(query,[],
@@ -94,14 +95,20 @@ var query = "SELECT * FROM ITEM_LIST;";
                     }
 
                     console.log(item_list);
-            }               
-            },
-            function(err){
-                console.log('display item list error ' + err);
-            });
-    },function(err){
-        console.log('Open database error' + err);
-    });
+                } 
+                              
+            },sqlError);
+
+    },dbError);
+}
+
+
+var sqlError = function(err){
+    console.log('sql executed error:' + err);
+}
+
+var dbError = function(err){
+    console.log('db transaction error:' + err);
 }
  ```
  
