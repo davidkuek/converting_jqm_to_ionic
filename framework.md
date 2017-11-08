@@ -1,4 +1,7 @@
 # The UI component
+
+-[Header](#Header)
+
 ## Header
 **JQM**:
 ```sh
@@ -16,10 +19,8 @@
     </ion-title> 
   </ion-navbar>
 </ion-header>
-```
 
-*Theming:*
-```sh
+<!-- Theming-->
 <ion-header>
   <ion-navbar color="primary"> 
     <ion-title>
@@ -45,9 +46,6 @@ $colors: (
 
 
 ## Footer
-For footer, copy the content inside `<div data-role="footer"></div>` from your **JQM** project.
-And add `<ion-footer>` below the `<ion-content>` tag in your Ionic project, example:
-
 **JQM**:
 ```sh
 <div data-role="footer">
@@ -72,16 +70,53 @@ And add `<ion-footer>` below the `<ion-content>` tag in your Ionic project, exam
 ```sh
 <a href="#" class="ui-btn">Button</a>
 <button class="ui-btn">Button</button>
+
+<!-- Onclick-->
 <button class="ui-btn" onclick="someFunction(event)">Button</button>
+
+<!-- Theming-->
+<button class="ui-btn ui-btn-a">Button</button>
+
+<!-- Icons -->
+<a href="#" class="ui-btn ui-icon-star ui-btn-icon-left">Left Icon</a>
+<button class="ui-btn ui-icon-star ui-btn-icon-left">Left Icon</button>
+
+<a href="#" class="ui-btn ui-icon-star ui-btn-icon-right">Right Icon</a>
+<button class="ui-btn ui-icon-star ui-btn-icon-right">Right Icon</button>
+
+<!-- Icons only -->
+<a href="#" class="ui-btn ui-icon-star ui-btn-icon-notext"></a>
 ```
 
 **Ionic:**
 ```sh
 <button ion-button>Button</button>
+
+<!-- Onclick-->
 <button ion-button (click)="someFunction($event)">Button</button>
+
+<!-- Theming-->
+<button ion-button color="secondary">Secondary</button>
+
+<!-- Icons -->
+<button ion-button icon-start>
+  <ion-icon name="star"></ion-icon>
+  Left Icon
+</button>
+
+<button ion-button icon-end>
+  Right Icon
+  <ion-icon name="star"></ion-icon>
+</button>
+
+<!-- Icons only -->
+<button ion-button icon-only>
+  <ion-icon name="star"></ion-icon>
+</button>
 ```
 
-[Ionic button docs](https://ionicframework.com/docs/components/#buttons)
+[Ionic button framework docs](https://ionicframework.com/docs/components/#buttons)
+[Ionic button api docs](https://ionicframework.com/docs/api/components/button/Button/)
 
 ## Lists
 **JQM**
@@ -114,6 +149,24 @@ And add `<ion-footer>` below the `<ion-content>` tag in your Ionic project, exam
     <li><a href="#">Work</a></li>
 </ul>
 
+<!-- Thumbnail-->  
+<ul data-role="listview" data-inset="true">
+    <li><a href="#">
+        <img src="../_assets/img/album-bb.jpg">
+    <h2>Broken Bells</h2>
+    <p>Broken Bells</p></a>
+    </li>
+    <li><a href="#">
+        <img src="../_assets/img/album-hc.jpg">
+    <h2>Warning</h2>
+    <p>Hot Chip</p></a>
+    </li>
+    <li><a href="#">
+        <img src="../_assets/img/album-p.jpg">
+    <h2>Wolfgang Amadeus Phoenix</h2>
+    <p>Phoenix</p></a>
+    </li>
+</ul>
 
 ```
 
@@ -139,10 +192,40 @@ And add `<ion-footer>` below the `<ion-content>` tag in your Ionic project, exam
 
 <!-- List dividers -->  
   <ion-item-group>
-    <ion-item-divider color="light">A</ion-item-divider>
-    <ion-item>Angola</ion-item>
-    <ion-item>Argentina</ion-item>
+    <ion-item-divider color="light">Mail</ion-item-divider>
+  <button ion-item>Inbox</button>  
+  <button ion-item>Outbox</button>
   </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider color="light">Contacts</ion-item-divider>
+  <button ion-item>Friends</button>  
+  <button ion-item>Work</button>
+  </ion-item-group>
+
+<!-- Thumbnail-->  
+<ion-list>
+  <button ion-item>
+    <ion-thumbnail item-start>
+      <img src="../_assets/img/album-bb.jpg">
+    </ion-thumbnail>
+    <h2>Broken Bells</h2>
+    <p>Broken Bells</p>
+  </button>
+  <button ion-item>
+    <ion-thumbnail item-start>
+      <img src="../_assets/img/album-hc.jpg">
+    </ion-thumbnail>
+    <h2>Warning</h2>
+    <p>Hot Chip</p>
+  </button>
+  <button ion-item>
+    <ion-thumbnail item-start>
+      <img src="../_assets/img/album-p.jpg">
+    </ion-thumbnail>
+    <h2>Wolfgang Amadeus Phoenix</h2>
+    <p>Phoenix</p>
+  </button>
+</ion-list>
 ```
 
 [Ionic list](https://ionicframework.com/docs/components/#lists)
@@ -151,31 +234,91 @@ And add `<ion-footer>` below the `<ion-content>` tag in your Ionic project, exam
 ## Inputs
 **JQM**:
 ```sh
+<!-- Text-->  
 <label for="text-basic">Username:</label>
 <input name="text-basic" id="text-basic" value="" type="text">
 
+<!-- Password--> 
 <label for="password">Password:</label>
 <input name="password" id="password" value="" autocomplete="off" type="password">
+
+<!-- Text Area--> 
+<label for="textarea-1">Textarea:</label>
+<textarea name="textarea-1" id="textarea-1"></textarea>
+
+<!-- Clear Input-->
+<label for="text-basic">Username:</label>
+<input name="text-basic" id="text-basic" value="" type="text" data-clear-btn="true"
+
 ```
 
 **Ionic:**
 ```sh
 <ion-list>
 
+<!-- Text--> 
   <ion-item>
-    <ion-label fixed>Username</ion-label>
+    <ion-label>Username</ion-label>
     <ion-input type="text" value=""></ion-input>
   </ion-item>
 
+<!-- Password--> 
   <ion-item>
-    <ion-label fixed>Password</ion-label>
+    <ion-label>Password</ion-label>
     <ion-input type="password"></ion-input>
   </ion-item>
 
+<!-- Text Area--> 
+  <ion-item>
+    <ion-label>Textarea</ion-label>
+    <ion-input type="textarea" value=""></ion-input>
+  </ion-item>
+
+<!-- Clear Input-->
+   <ion-item>
+    <ion-label>Clear Input</ion-label>
+    <ion-input type="text" value="" clearInput></ion-input>
+  </ion-item>
 </ion-list>
 ```
 
-[Ionic input docs](https://ionicframework.com/docs/components/#inputs)
+[Ionic input framework doc](https://ionicframework.com/docs/components/#inputs)
+[Ionic input api doc](https://ionicframework.com/docs/api/components/input/Input/)
+
+##CheckBox
+**JQM:**
+```sh
+<!-- Basic-->
+    <label>
+        <input name="checkbox-0 " type="checkbox">Check me
+    </label>
+
+
+<!-- Disabled-->
+    <label>
+        <input name="checkbox-0 " type="checkbox" disabled="">Check me
+    </label>
+```
+
+**Ionic:**
+```sh
+<ion-list>
+<!-- Basic-->
+  <ion-item>
+    <ion-label>Check me</ion-label>
+    <ion-checkbox></ion-checkbox>
+  </ion-item>
+
+<!-- Disabled-->
+  <ion-item>
+    <ion-label>Check me</ion-label>
+    <ion-checkbox disabled="true"></ion-checkbox>
+  </ion-item>
+</ion-list>
+```
+
+[Ionic checkbox framework docs](https://ionicframework.com/docs/components/#checkbox)
+[Ionic checkbox api docs](https://ionicframework.com/docs/api/components/checkbox/Checkbox/)
 
 
 ## Radio
@@ -512,3 +655,6 @@ export class HomePage {
  *Note: If there is a header in your home page, the secondPage will automaticaly have the back button, which by pressing that will bring you back to the pervious page.*
  
   - [Ionic nav docs](https://ionicframework.com/docs/components/#navigation)
+
+
+
