@@ -575,11 +575,18 @@ export class AppModule {}
 
 *home.ts:*
 ```sh
-import { File } from '@ionic-native/file'
+import { File } from '@ionic-native/file';
 
 
-constructor(private file: File) { }
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage {
 
+  constructor(public navCtrl: NavController,private file: File) {
+
+  }
 
 createFile(){
 
@@ -642,6 +649,7 @@ createDir(){
 }
 
 }
+
 ```
 
 [Ionic file docs](https://ionicframework.com/docs/native/file/)
@@ -649,53 +657,52 @@ createDir(){
 ## Geolocation
 **JQM:**
 ```sh
+var watchID;
+
+var getPositionSuccess = function(position) {
+    console.log('Latitude: '          + position.coords.latitude          + '\n' +
+                'Longitude: '         + position.coords.longitude         + '\n' +
+                'Altitude: '          + position.coords.altitude          + '\n' +
+                'Accuracy: '          + position.coords.accuracy          + '\n' +
+                'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+                'Heading: '           + position.coords.heading           + '\n' +
+                'Speed: '             + position.coords.speed             + '\n' +
+                'Timestamp: '         + position.timestamp                + '\n');
+
+};
+
+
+var watchPositionSuccess = function(position) {
+    var element = document.getElementById('geolocation');
+    element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
+                        'Longitude: ' + position.coords.longitude     + '<br />' +
+                        '<hr />'      + element.innerHTML;
+
+    console.log('Started watching');
+}
+
+
+var onError = function(error) {
+    alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
+}
+
 
 function getPosition(){
- navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    var onSuccess = function(position) {
-        alert('Latitude: '          + position.coords.latitude          + '\n' +
-              'Longitude: '         + position.coords.longitude         + '\n' +
-              'Altitude: '          + position.coords.altitude          + '\n' +
-              'Accuracy: '          + position.coords.accuracy          + '\n' +
-              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-              'Heading: '           + position.coords.heading           + '\n' +
-              'Speed: '             + position.coords.speed             + '\n' +
-              'Timestamp: '         + position.timestamp                + '\n');
-    };
+ navigator.geolocation.getCurrentPosition(getPositionSuccess, onError);
 
-    // onError Callback receives a PositionError object
-    //
-    function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-    }
   }
 
-   
 
 function watchPosition(watchID){
-    watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
-    // Options: throw an error if no update is received every 30 seconds.
-    //
-        function onSuccess(position) {
-        var element = document.getElementById('geolocation');
-        element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
-                            'Longitude: ' + position.coords.longitude     + '<br />' +
-                            '<hr />'      + element.innerHTML;
-        }
-
-    // onError Callback receives a PositionError object
-    //
-        function onError(error) {
-          alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-        }
+    window.watchID = navigator.geolocation.watchPosition(watchPositionSuccess, onError, { timeout: 30000 });
 
 }
 
 function clearWatchPosition(watchID){
-  navigator.geolocation.clearWatch(watchID);
+  navigator.geolocation.clearWatch(window.watchID);
 }
+
 ```
 
 **Ionic:**
@@ -730,37 +737,68 @@ export class AppModule { }
 *home.ts:*
 ```sh
 import { Geolocation } from '@ionic-native/geolocation';
+import 'rxjs/add/operator/filter'
 
-...
 
-constructor(private geolocation: Geolocation) {}
 
-...
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage {
+
+  subscription:any;
+
+  constructor(public navCtrl: NavController,private geolocation: Geolocation) {
+
+  }
 
 getPosition(){
-  this.geolocation.getCurrentPosition().then((resp) => {
+  this.geolocation.getCurrentPosition().then((position) => {
 
-    console.log(resp.coords.latitude);
-    console.log(resp.coords.longtitude);
-    console.log(resp.coords.altitude);
-    console.log(resp.coords.accuracy);
-    console.log(resp.coords.altitudeAccuracy);
-    console.log(resp.coords.heading);
-    console.log(resp.coords.speed);
-    console.log(resp.coords.timestamp);
+    console.log('Latitude: '          + position.coords.latitude          + '\n' +
+                'Longitude: '         + position.coords.longitude         + '\n' +
+                'Altitude: '          + position.coords.altitude          + '\n' +
+                'Accuracy: '          + position.coords.accuracy          + '\n' +
+                'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+                'Heading: '           + position.coords.heading           + '\n' +
+                'Speed: '             + position.coords.speed             + '\n' +
+                'Timestamp: '         + position.timestamp                + '\n');
+
 
   }).catch((error) => {
     console.log('Error getting location', error);
   });
 }
 
-let watch = this.geolocation.watchPosition();
-watch.subscribe((data) => {
- // data can be a set of coordinates, or an error (if an error occurred).
- // data.coords.latitude
- // data.coords.longitude
-});
+watchPosition(){
+  this.subscription = this.geolocation.watchPosition({timeout:30000})
+                              .filter((p) => p.coords !== undefined) //Filter Out Errors
+                              .subscribe(position => {
+    console.log('Latitude: '          + position.coords.latitude          + '\n' +
+                'Longitude: '         + position.coords.longitude         + '\n' +
+                'Altitude: '          + position.coords.altitude          + '\n' +
+                'Accuracy: '          + position.coords.accuracy          + '\n' +
+                'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+                'Heading: '           + position.coords.heading           + '\n' +
+                'Speed: '             + position.coords.speed             + '\n' +
+                'Timestamp: '         + position.timestamp                + '\n');
+
+},error=>{
+  console.log(error);
+})
+                              
+}
+
+stopWatchPosition(){
+// To stop notifications
+this.subscription.unsubscribe()
+}
+
+}
+
 ```
 
 [Ionic geolocation docs](https://ionicframework.com/docs/native/geolocation/)
 
+More Ionic Native content: [Ionic Native docs](https://ionicframework.com/docs/native/geolocation/)
