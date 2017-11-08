@@ -1,6 +1,16 @@
 # The UI component
 
 - [Header](#header)
+- [Footer](#footer)
+- [Buttons](#buttons)
+- [Lists](#lists)
+- [Inputs](#inputs)
+- [Checkbox](#checkbox)
+- [Radio](#radio)
+- [Searchbar](#searchbar)
+- [Menu](#menu)
+- [Alert](#alert)
+- [Datepicker](#datepicker)
 
 ## <a name="header"></a>Header
 **JQM**:
@@ -45,7 +55,7 @@ $colors: (
 [Ionic scss Theming Docs](https://ionicframework.com/docs/theming/theming-your-app/)
 
 
-## Footer
+## <a name="footer">Footer
 **JQM**:
 ```sh
 <div data-role="footer">
@@ -65,7 +75,7 @@ $colors: (
 
 [Ionic Footer Docs](https://ionicframework.com/docs/api/components/toolbar/Footer/)
 
-## Buttons
+## <a name="buttons">Buttons
 **JQM**: 
 ```sh
 <a href="#" class="ui-btn">Button</a>
@@ -118,7 +128,7 @@ $colors: (
 [Ionic button framework docs](https://ionicframework.com/docs/components/#buttons)
 [Ionic button api docs](https://ionicframework.com/docs/api/components/button/Button/)
 
-## Lists
+## <a name="lists">Lists
 **JQM**
 ```sh
 <!-- Basic linked list -->
@@ -231,7 +241,7 @@ $colors: (
 [Ionic list](https://ionicframework.com/docs/components/#lists)
 
 
-## Inputs
+## <a name="inputs">Inputs
 **JQM**:
 ```sh
 <!-- Text-->  
@@ -285,7 +295,7 @@ $colors: (
 [Ionic input framework doc](https://ionicframework.com/docs/components/#inputs)
 [Ionic input api doc](https://ionicframework.com/docs/api/components/input/Input/)
 
-##CheckBox
+## <a name="checkbox">CheckBox
 **JQM:**
 ```sh
 <!-- Basic-->
@@ -321,7 +331,7 @@ $colors: (
 [Ionic checkbox api docs](https://ionicframework.com/docs/api/components/checkbox/Checkbox/)
 
 
-## Radio
+## <a name="radio">Radio
 **JQM**:
 ```sh
 <fieldset data-role="controlgroup">
@@ -369,7 +379,7 @@ $colors: (
 
 [Ionic radio docs](https://ionicframework.com/docs/components/#radio)
 
-## Searchbar
+## <a name="searchbar">Searchbar
 
 **JQM:**
 ```sh
@@ -438,7 +448,7 @@ fruits = [];
 [Ionic searchbar component](https://ionicframework.com/docs/components/#searchbar)
 [Ionic searchbar api](https://ionicframework.com/docs/api/components/searchbar/Searchbar/)
 
-## Menu
+## <a name="menu">Menu
 **JQM:**
 ```sh
 <div data-role="page">
@@ -499,7 +509,7 @@ app.html (/src/app):
 [Ionic menu api docs](https://ionicframework.com/docs/api/components/menu/Menu/)
 
 
-## Basic alert
+## <a name="alert">Alert
 **JQM:**
 ```sh
 <button onclick="popAlert()">Alert</button>
@@ -539,7 +549,7 @@ export class MyPage {
 [Ionic alert docs](https://ionicframework.com/docs/components/#alert)
 
 
-## Datepicker
+## <a name="datepicker">Datepicker
 **JQM:**
 ```sh
 <input data-role="date" data-inline="true" type="text">
