@@ -53,7 +53,8 @@ $colors: (
 
 [Ionic Header Docs](https://ionicframework.com/docs/api/components/toolbar/Header/)
 [Ionic scss Theming Docs](https://ionicframework.com/docs/theming/theming-your-app/)
- <a href="#top">Back to top</a>
+ 
+<a href="#top">Back to top</a>
 
 ## <a name="footer">Footer
 **JQM**:
@@ -74,7 +75,8 @@ $colors: (
 ```
 
 [Ionic Footer Docs](https://ionicframework.com/docs/api/components/toolbar/Footer/)
- <a href="#top">Back to top</a>
+
+<a href="#top">Back to top</a>
 
 ## <a name="buttons">Buttons
 **JQM**: 
@@ -128,7 +130,8 @@ $colors: (
 
 [Ionic button framework docs](https://ionicframework.com/docs/components/#buttons)
 [Ionic button api docs](https://ionicframework.com/docs/api/components/button/Button/)
- <a href="#top">Back to top</a>
+
+<a href="#top">Back to top</a>
 
 ## <a name="lists">Lists
 **JQM**
@@ -241,7 +244,8 @@ $colors: (
 ```
 
 [Ionic list](https://ionicframework.com/docs/components/#lists)
- <a href="#top">Back to top</a>
+ 
+<a href="#top">Back to top</a>
 
 ## <a name="inputs">Inputs
 **JQM**:
@@ -296,7 +300,8 @@ $colors: (
 
 [Ionic input framework doc](https://ionicframework.com/docs/components/#inputs)
 [Ionic input api doc](https://ionicframework.com/docs/api/components/input/Input/)
- <a href="#top">Back to top</a>
+ 
+<a href="#top">Back to top</a>
 
 ## <a name="checkbox">CheckBox
 **JQM:**
@@ -332,7 +337,8 @@ $colors: (
 
 [Ionic checkbox framework docs](https://ionicframework.com/docs/components/#checkbox)
 [Ionic checkbox api docs](https://ionicframework.com/docs/api/components/checkbox/Checkbox/)
- <a href="#top">Back to top</a>
+ 
+<a href="#top">Back to top</a>
 
 ## <a name="radio">Radio
 **JQM**:
@@ -381,7 +387,8 @@ $colors: (
 ```
 
 [Ionic radio docs](https://ionicframework.com/docs/components/#radio)
- <a href="#top">Back to top</a>
+ 
+<a href="#top">Back to top</a>
 
 ## <a name="searchbar">Searchbar
 
@@ -451,8 +458,9 @@ fruits = [];
  
 [Ionic searchbar component](https://ionicframework.com/docs/components/#searchbar)
 [Ionic searchbar api](https://ionicframework.com/docs/api/components/searchbar/Searchbar/)
- <a href="#top">Back to top</a>
  
+<a href="#top">Back to top</a>
+
 ## <a name="menu">Menu
 **JQM:**
 ```sh
@@ -512,7 +520,8 @@ app.html (/src/app):
 ```
 
 [Ionic menu api docs](https://ionicframework.com/docs/api/components/menu/Menu/)
- <a href="#top">Back to top</a>
+ 
+<a href="#top">Back to top</a>
 
 ## <a name="alert">Alert
 **JQM:**
@@ -552,7 +561,8 @@ export class MyPage {
 ```
 
 [Ionic alert docs](https://ionicframework.com/docs/components/#alert)
- <a href="#top">Back to top</a>
+
+<a href="#top">Back to top</a>
 
 ## <a name="datepicker">Datepicker
 **JQM:**
@@ -569,7 +579,8 @@ export class MyPage {
 ```
 
 [Ionic datepicker docs](https://ionicframework.com/docs/api/components/datetime/DateTime/)
- <a href="#top">Back to top</a>
+
+<a href="#top">Back to top</a>
 
 ## Creating a new page
 
