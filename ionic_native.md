@@ -583,17 +583,62 @@ constructor(private file: File) { }
 
 createFile(){
 
-  this.file.createFile(dirEntry, fileName,isAppend)
-  .then(() => console.log('created'))
+  let path = this.file.externalRootDirectory;
+  let fileName = 'someFile.txt';
+  let isAppend = true;
+  // true replace file with same name, false returns error
+
+  this.file.createFile(path, fileName,isAppend)
+  .then(file => console.log('created' + file.fullPath))
   .catch(err => console.log(err))
   }
 
 
+writeFile(){
 
-createDirectory(){
-  this.file.createDir(dirEntry, dirName, isAppend)
-  .then(()=> console.log('directory created.'))
+  let path = this.file.externalRootDirectory;
+  let fileName = 'someFile.txt';
+  let textContent = 'Lorem Ipsum';
+  let text = new Blob([textContent],{type:'text/plain'});
+
+  this.file.writeFile(path, fileName, text, {replace:true})
+  .then(() => console.log('write success: ' + textContent))
+  .catch(err => console.log(err))
+}
+
+readFile(){
+
+  let path = this.file.externalRootDirectory;
+  let fileName = 'someFile.txt';
+
+
+  this.file.readAsText(path,fileName)
+  .then((result)=>console.log(result))
   .catch(err=> console.log(err))
+
+}
+
+removeFile(){
+
+  let path = this.file.externalRootDirectory;
+  let fileName = 'someFile.txt';
+
+  this.file.removeFile(path,fileName)
+  .then((result)=>console.log(result))
+  .catch(err => console.log(err))
+}
+
+
+createDir(){
+
+  let path = this.file.externalRootDirectory;
+  let dirName = 'ionicFile';
+  let replace = true;
+
+  this.file.createDir(path,dirName,replace)
+  .then((result)=>console.log(result))
+  .catch(err=> console.log(err))
+
 }
 
 }
