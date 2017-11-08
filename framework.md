@@ -1,8 +1,8 @@
 # The UI component
 
--[Header](#Header)
+- [Header](#header)
 
-## Header
+## <a name="header"></a>Header
 **JQM**:
 ```sh
 <div data-role="header">
