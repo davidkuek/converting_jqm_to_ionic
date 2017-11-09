@@ -268,6 +268,12 @@ this.sqlite.create({
 
 *Note: Sqlite usage may cause your app not viewable with `ionic serve`, therefore view your app device instead.*
 
+[Ionic SQLite Docs](https://ionicframework.com/docs/native/sqlite/)
+
+<a href="#top">Back to top</a>
+
+  
+
 ## <a name="camera">Camera
 **JQM:**
 ```sh
@@ -414,6 +420,8 @@ openLibrary(){
 ```
 
 [Ionic camera docs](https://ionicframework.com/docs/native/camera/)
+
+<a href="#top">Back to top</a>
 
 ## <a name="file">File
 **JQM:**
@@ -659,6 +667,8 @@ createDir(){
 
 [Ionic file docs](https://ionicframework.com/docs/native/file/)
 
+<a href="#top">Back to top</a>
+
 ## <a name="geolocation">Geolocation
 **JQM:**
 ```sh
@@ -807,3 +817,5 @@ this.subscription.unsubscribe()
 [Ionic geolocation docs](https://ionicframework.com/docs/native/geolocation/)
 
 More Ionic Native content: [Ionic Native docs](https://ionicframework.com/docs/native/)
+
+<a href="#top">Back to top</a>
