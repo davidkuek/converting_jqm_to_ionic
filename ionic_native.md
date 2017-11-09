@@ -1,7 +1,12 @@
 # Ionic Native
 Usage of phone functions, please have cordova installed before proceed. 
 
-## Sqlite database
+- [SQLite database](#sqlite)
+- [Camera](#camera)
+- [File](#file)
+- [Geolocation](#geolocation)
+
+## <a name="sqlite">Sqlite database
 **JQM:**
  ```sh
 var dbName = 'Testdb';
@@ -263,7 +268,7 @@ this.sqlite.create({
 
 *Note: Sqlite usage may cause your app not viewable with `ionic serve`, therefore view your app device instead.*
 
-## Cordova Camera
+## <a name="camera">Camera
 **JQM:**
 ```sh
 <img src="" id="imageFile">
@@ -410,7 +415,7 @@ openLibrary(){
 
 [Ionic camera docs](https://ionicframework.com/docs/native/camera/)
 
-## File
+## <a name="file">File
 **JQM:**
 
 *Creating a new persistent file:*
@@ -654,7 +659,7 @@ createDir(){
 
 [Ionic file docs](https://ionicframework.com/docs/native/file/)
 
-## Geolocation
+## <a name="geolocation">Geolocation
 **JQM:**
 ```sh
 var watchID;
@@ -801,4 +806,4 @@ this.subscription.unsubscribe()
 
 [Ionic geolocation docs](https://ionicframework.com/docs/native/geolocation/)
 
-More Ionic Native content: [Ionic Native docs](https://ionicframework.com/docs/native/geolocation/)
+More Ionic Native content: [Ionic Native docs](https://ionicframework.com/docs/native/)
