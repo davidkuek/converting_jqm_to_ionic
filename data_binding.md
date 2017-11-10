@@ -1,13 +1,9 @@
 
-# Extra content 
-
- 
-
-## Data Binding
-Angularjs offer a fundamental called data binding which allows you to bind data from **.ts** to **.html**.
-In JQM, this often refer to `append` or `$()`, however Ionic makes it more efficent and code saving, example:
-
+# Data Binding
+For two way binding data between view and model. JQM refers to `$()` or `append`. 
 **JQM:**
+
+*index.html:*
 ```sh
    <h1 id="fruit-topic"></h1>
    <h2 id="fruit-subtopic"></h2>
@@ -16,8 +12,10 @@ In JQM, this often refer to `append` or `$()`, however Ionic makes it more effic
          
       </ul>
       <p>There are many more!</p>
-      
-      <script>
+```
+
+*index.js:*
+```sh
       $( document ).ready(function() {
          var title = "My favourite Fruit";
          var fruit = ["Durian", "Apple", "Orange", "Watermelon", "Grape"];
@@ -31,12 +29,11 @@ In JQM, this often refer to `append` or `$()`, however Ionic makes it more effic
                                  "<li>" + fruit[4] + "</li>");
       });
 
-      </script>
 ```
 
 **Ionic:**
 
-On `home.html`:
+*home.html:*
 ```sh
 <ion-content>
    <h1>{{title}}</h1>
@@ -54,7 +51,7 @@ On `home.html`:
 </ion-content>
 ```
 
-In your `home.ts`:
+*home.ts*
  ```sh
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -79,10 +76,11 @@ favFruit = this.fruits[0];
 
 
 ### ngFor
-ngFor is a method to loop through your data in your `.html`.
-For JQM will refer as `for loop`, example from pervious:
+ngFor is a method to loop through your data in app view. JQM will refer as `for loop`.
 
 **JQM:**
+
+*index.html:*
 ```sh
    <h1 id="fruit-topic"></h1>
    <h2 id="fruit-subtopic"></h2>
@@ -91,8 +89,10 @@ For JQM will refer as `for loop`, example from pervious:
          
       </ul>
       <p>There are many more!</p>
-      
-      <script>
+```
+
+*index.js:*
+```sh
       $( document ).ready(function() {
          var title = "My favourite Fruit";
          var fruit = ["Durian", "Apple", "Orange", "Watermelon", "Grape"];
@@ -104,7 +104,6 @@ For JQM will refer as `for loop`, example from pervious:
          }
       });
 
-      </script>
 ```
 
 **Ionic:**
@@ -125,7 +124,7 @@ For JQM will refer as `for loop`, example from pervious:
 </ion-content>
 ```
 
-Change it to:
+Edit it to:
 ```sh
 <ion-content>
    <h1>{{title}}</h1>
@@ -142,10 +141,11 @@ Change it to:
 ```
 
 ### ngIf
-ngIf is a method to display a view or a portion of a view only under specific circumstances.
-This is similar to JQM *if else statement*. Pervious example:
+ngIf is a method to display a view or a portion of a view only under specific circumstances. JQM refer as `if else statement`.
 
 **JQM:**
+
+*index.html:*
 ```sh
    <h1 id="fruit-topic"></h1>
    <h2 id="fruit-subtopic"></h2>
@@ -154,9 +154,10 @@ This is similar to JQM *if else statement*. Pervious example:
          
       </ul>
       <p id="fruit-paragraph"></p>
-      
-      <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-      <script>
+```
+
+*index.js:*
+```sh
       $( document ).ready(function() {
          var title = "My favourite Fruit";
          var fruit = ["Durian", "Apple", "Orange", "Watermelon", "Grape"];
@@ -171,8 +172,6 @@ This is similar to JQM *if else statement*. Pervious example:
          $('#fruit-paragraph').append("There are many more!");  
          }
       });
-
-      </script>
 ```
    
 **Ionic:**
@@ -192,9 +191,91 @@ This is similar to JQM *if else statement*. Pervious example:
 ```
 *This tells the view to display the paragraph if there more than 3 items in the fruits array data.*
 
+
+
 [Angular data binding docs](https://angular.io/guide/displaying-data)
 
+## ngModel
+Ngmodel is use for one way data binding from controller to model of an app. JQM refer as `$().value` of other method to get data from the app view.
 
+**JQM:**
 
+*index.html:*
+```sh
+<label for="text-basic">Username:</label>
+<input name="text-basic" id="text-basic" value="someUsername" type="text">
+
+<label for="password">Password:</label>
+<input name="password" id="password" value="somePassword" type="password">
+
+<label for="textarea-1">Textarea:</label>
+<textarea name="textarea-1" id="textarea">someTextArea</textarea>
+
+<label for="textarea-1">Unit:</label>
+<select name="select-native-15" id="select">
+    <option value="1">Pack</option>
+    <option value="2">Bottle</option>
+    <option value="3">Piece</option>
+</select>
+```
+
+*index.js:*
+```sh
+      $( document ).ready(function() {
+        var username = $('#text-basic').val(); 
+        var password = $('#password').val(); 
+        var textArea = $('#textarea).val(); 
+        var unit = $('#select').val(); 
+
+        console.log(username); //someUsername
+        console.log(password); //somePassword
+        console.log(textArea); //someTextArea
+        console.log(select); //1
+      });
+```
+
+**Ionic:**
+
+*home.html:*
+```sh
+     <ion-label>Username:</ion-label>
+    <ion-input type="text" [ngModel]="username">someUsername</ion-input>
+    
+    <ion-label>Password:</ion-label>
+    <ion-input type="password" [ngModel]="password">somePassword</ion-input>
+
+    <ion-label>Textarea:</ion-label>
+    <ion-textarea type="text"  [ngModel]="textarea"></ion-textarea>
+  
+    <ion-label>Unit:</ion-label>
+    <ion-select [ngModel]="unit">
+      <ion-option value="1">Piece(s)</ion-option>
+      <ion-option value="2">Pack(s)</ion-option>
+      <ion-option value="3">Bottle(s)</ion-option>
+    </ion-select>
+```
+
+*home.ts*
+```sh
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage {
+// add this
+title = 'My Favourite Fruit';
+fruits = ['Durian', 'Apple', 'Orange', 'Watermelon', 'Grape'];
+favFruit = this.fruits[0];
+
+  constructor(public navCtrl: NavController) {
+
+  }
+ . . . 
+ 
+}
+```
 
 
