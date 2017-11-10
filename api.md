@@ -1,6 +1,8 @@
-#Api
+# Api
 
-- [Nav](#button)
+- [Mobileinit](#mobileinit)
+- [Pageinit](#pageinit)
+- [Navigate](#navigate)
 
 ## <a name="mobileinit">MobileInit
 **JQM:**
@@ -70,7 +72,7 @@ export class AboutPage {
 
 ```
 
-
+<a href="#top">Back to top</a>
 
 ## <a name="navigate">Navigate
 **JQM:**
@@ -172,6 +174,6 @@ export class HomePage {
   - [Ionic nav docs](https://ionicframework.com/docs/components/#navigation)
 
 
-
+<a href="#top">Back to top</a>
 
 
