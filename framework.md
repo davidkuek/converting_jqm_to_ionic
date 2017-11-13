@@ -41,7 +41,7 @@
 ```
 
 *Custom color at scss file:*
-```html
+```scss
 $colors: (
   primary:    #488aff, <-- you can modify the color code from here -->
   secondary:  #32db64,
