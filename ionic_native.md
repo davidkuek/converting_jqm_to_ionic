@@ -8,7 +8,7 @@ Usage of phone functions, please have cordova installed before proceed.
 
 ## <a name="sqlite">Sqlite database
 **JQM:**
- ```sh
+ ```js
 var dbName = 'Testdb';
 var dbVersion = '1.0';
 var dbDisplayName = 'Test DB';
@@ -126,7 +126,7 @@ $ npm install --save @ionic-native/sqlite
  ```
  
 *app.module.ts:*
-```sh
+```ts
  ...
 
 import { SQLite } from '@ionic-native/sqlite';
@@ -147,7 +147,7 @@ export class AppModule { }
 ```
 
 *home.ts:*
-```sh
+```ts
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
 @Component({
@@ -276,7 +276,7 @@ this.sqlite.create({
 
 ## <a name="camera">Camera
 **JQM:**
-```sh
+```html
 <img src="" id="imageFile">
 
 <script>
@@ -341,7 +341,7 @@ $ npm install --save @ionic-native/camera
 ```
 
 *app.module.ts:*
-```sh
+```ts
 ...
 
 import { Camera } from '@ionic-native/camera';
@@ -363,14 +363,14 @@ export class AppModule { }
 ```
 
 *home.html:*
-```sh
+```html
   <ion-content padding>
     <img src="{{imageFile}}">
   </ion-content>
 ```
 
 *home.ts:*
-```sh
+```ts
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Injectable()
@@ -427,7 +427,7 @@ openLibrary(){
 **JQM:**
 
 *Creating a new persistent file:*
-```sh
+```js
 
 
 function createFile(){
@@ -576,7 +576,7 @@ $ npm install --save @ionic-native/file
 ```
 
 *app.module.ts:*
-```sh
+```ts
 import { File } from '@ionic-native/file';
 
   providers: [
@@ -587,7 +587,7 @@ export class AppModule {}
 ```
 
 *home.ts:*
-```sh
+```ts
 import { File } from '@ionic-native/file';
 
 
@@ -671,7 +671,7 @@ createDir(){
 
 ## <a name="geolocation">Geolocation
 **JQM:**
-```sh
+```js
 var watchID;
 
 var getPositionSuccess = function(position) {
@@ -729,7 +729,7 @@ $ npm install --save @ionic-native/geolocation
 ```
 
 *Insert into app.module.ts:*
-```sh
+```ts
 ...
 
 import { Geolocation } from '@ionic-native/geolocation';
@@ -750,7 +750,7 @@ export class AppModule { }
 ```
 
 *home.ts:*
-```sh
+```ts
 import { Geolocation } from '@ionic-native/geolocation';
 import 'rxjs/add/operator/filter'
 

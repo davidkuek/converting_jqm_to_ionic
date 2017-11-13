@@ -6,7 +6,7 @@
 
 ## <a name="mobileinit">MobileInit
 **JQM:**
-```typescript
+```js
 $( document ).on( "mobileinit", function() {
 	// init something here
 });
@@ -15,7 +15,7 @@ $( document ).on( "mobileinit", function() {
 **Ionic:**
 
 *app.component.ts:*
-```sh
+```ts
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -43,7 +43,7 @@ export class MyApp {
 
 ## <a name="pageinit">PageInit
 **JQM:**
-```sh
+```js
 $( document ).on( "pageinit", "#aboutPage", function( event ) {
   // init something for the page #aboutPage
 });
@@ -51,7 +51,7 @@ $( document ).on( "pageinit", "#aboutPage", function( event ) {
 
 
 **Ionic:**
-```sh
+```ts
 import { Platform } from 'ionic-angular'; //import
 
 @Component({
@@ -76,7 +76,7 @@ export class AboutPage {
 
 ## <a name="navigate">Navigate
 **JQM:**
-```sh
+```js
 <a href="#second-page" class="ui-btn">Next page</a>
 
 <!-- Second page -->
@@ -84,7 +84,7 @@ export class AboutPage {
 </div>
  ```
  or
- ```sh
+ ```ts
  <button onclick="nextPage()">Next page</button>
 
  <!-- Second page -->
@@ -107,7 +107,7 @@ export class AboutPage {
 [More ionic cli docs](https://ionicframework.com/docs/cli/)
 
  2. Open `app.module.ts` at /src/app.
-```sh
+```ts
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -144,11 +144,11 @@ export class AppModule {}
  ```
 
  3. home.html:
- ```sh
+ ```html
  <button ion-button icon-only (click)="nextPage()">Next Page</button>
  ```
  4. home.ts:
-```sh
+```ts
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SecondPage } from '../second/second'; //import again but different path

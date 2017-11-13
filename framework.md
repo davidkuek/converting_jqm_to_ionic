@@ -14,14 +14,14 @@
 
 ## <a name="header"></a>Header
 **JQM**:
-```sh
+```html
 <div data-role="header">
   <h1>Copy this</h1>
     </div>
 ```
 
 **Ionic:**
-```sh
+```html
 <ion-header>
   <ion-navbar>
     <ion-title>
@@ -41,7 +41,7 @@
 ```
 
 *Custom color at scss file:*
-```sh
+```html
 $colors: (
   primary:    #488aff, <-- you can modify the color code from here -->
   secondary:  #32db64,
@@ -58,13 +58,13 @@ $colors: (
 
 ## <a name="footer">Footer
 **JQM**:
-```sh
+```html
 <div data-role="footer">
 <h1>Footer</h1>
 </div>
 ```
 **Ionic:**
-```sh
+```html
 <ion-content></ion-content>
 
 <ion-footer>
@@ -80,7 +80,7 @@ $colors: (
 
 ## <a name="buttons">Buttons
 **JQM**: 
-```sh
+```html
 <a href="#" class="ui-btn">Button</a>
 <button class="ui-btn">Button</button>
 
@@ -102,7 +102,7 @@ $colors: (
 ```
 
 **Ionic:**
-```sh
+```html
 <button ion-button>Button</button>
 
 <!-- Onclick-->
@@ -135,7 +135,7 @@ $colors: (
 
 ## <a name="lists">Lists
 **JQM**
-```sh
+```html
 <!-- Basic linked list -->
 <ul data-role="listview">
     <li><a href="#">Acura</a></li>
@@ -186,7 +186,7 @@ $colors: (
 ```
 
 **Ionic:**
-```sh
+```html
 <!-- Basic linked list -->
 <ion-list>
   <button ion-item>Acura</button>  
@@ -249,7 +249,7 @@ $colors: (
 
 ## <a name="inputs">Inputs
 **JQM**:
-```sh
+```html
 <!-- Text-->  
 <label for="text-basic">Username:</label>
 <input name="text-basic" id="text-basic" value="" type="text">
@@ -269,7 +269,7 @@ $colors: (
 ```
 
 **Ionic:**
-```sh
+```html
 <ion-list>
 
 <!-- Text--> 
@@ -305,7 +305,7 @@ $colors: (
 
 ## <a name="checkbox">CheckBox
 **JQM:**
-```sh
+```html
 <!-- Basic-->
     <label>
         <input name="checkbox-0 " type="checkbox">Check me
@@ -319,7 +319,7 @@ $colors: (
 ```
 
 **Ionic:**
-```sh
+```html
 <ion-list>
 <!-- Basic-->
   <ion-item>
@@ -342,7 +342,7 @@ $colors: (
 
 ## <a name="radio">Radio
 **JQM**:
-```sh
+```html
 <fieldset data-role="controlgroup">
     <legend>Radio buttons, vertical controlgroup:</legend>
         <input name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" type="radio">
@@ -357,7 +357,7 @@ $colors: (
 ```
 
 **Ionic:**
-```sh
+```html
 <ion-list radio-group>
   <ion-list-header>
     Radio buttons, vertical controlgroup:
@@ -393,7 +393,7 @@ $colors: (
 ## <a name="searchbar">Searchbar
 
 **JQM:**
-```sh
+```html
 <ul data-role="listview" data-filter="true" data-filter-placeholder="Search fruits..." data-inset="true">
     <li><a href="#">Apple</a></li>
     <li><a href="#">Banana</a></li>
@@ -406,7 +406,7 @@ $colors: (
 
 **Ionic:**
 home.html
-```sh
+```html
 <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 <ion-list>
   <ion-item *ngFor="let fruit of fruits">
@@ -416,7 +416,7 @@ home.html
 ```
 
 home.ts
-```sh
+```ts
 @Component({
   templateUrl: 'search/template.html',
 })
@@ -463,10 +463,10 @@ fruits = [];
 
 ## <a name="menu">Menu
 **JQM:**
-```sh
+```html
 <div data-role="page">
   <div data-role="header">
-    <a href="#mypanel" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars"></a>
+    <a href="#mypanel" class="ui-btn ui-htmladow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars"></a>
   </div>
     <div data-role="panel" id="mypanel" data-display="overlay">
       <div data-role="header">
@@ -480,7 +480,7 @@ fruits = [];
 **Ionic:**
 
 home.html:
-```sh
+```html
 <ion-header>
   <ion-navbar>
      <button ion-button icon-left menuToggle>
@@ -499,7 +499,7 @@ home.html:
 ```
 
 app.html (/src/app):
-```sh
+```html
 <ion-menu type="overlay" [content]="mycontent">
 <ion-header>
   <ion-navbar>
@@ -525,7 +525,7 @@ app.html (/src/app):
 
 ## <a name="alert">Alert
 **JQM:**
-```sh
+```html
 <button onclick="popAlert()">Alert</button>
 <script>
 function popAlert(){
@@ -537,12 +537,12 @@ function popAlert(){
 **Ionic:**
 
 home.html
-```sh
+```html
 <button ion-button (click)="popAlert()">Button</button>
 ```
 
 home.ts
-```sh
+```ts
 import { AlertController } from 'ionic-angular';
 
 export class MyPage {
@@ -566,12 +566,12 @@ export class MyPage {
 
 ## <a name="datepicker">Datepicker
 **JQM:**
-```sh
+```html
 <input data-role="date" data-inline="true" type="text">
 ```
 
 **Ionic:**
-```sh
+```html
 <ion-item>
   <ion-label>Date</ion-label>
   <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>

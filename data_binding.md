@@ -4,7 +4,7 @@ For two way binding data between view and model. JQM refers to `$()` or `append`
 **JQM:**
 
 *index.html:*
-```sh
+```html
    <h1 id="fruit-topic"></h1>
    <h2 id="fruit-subtopic"></h2>
    
@@ -15,7 +15,7 @@ For two way binding data between view and model. JQM refers to `$()` or `append`
 ```
 
 *index.js:*
-```sh
+```js
       $( document ).ready(function() {
          var title = "My favourite Fruit";
          var fruit = ["Durian", "Apple", "Orange", "Watermelon", "Grape"];
@@ -34,7 +34,7 @@ For two way binding data between view and model. JQM refers to `$()` or `append`
 **Ionic:**
 
 *home.html:*
-```sh
+```html
 <ion-content>
    <h1>{{title}}</h1>
    <h2>My top favourite is {{favFruit}}!</h2>
@@ -52,7 +52,7 @@ For two way binding data between view and model. JQM refers to `$()` or `append`
 ```
 
 *home.ts*
- ```sh
+ ```ts
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -81,7 +81,7 @@ ngFor is a method to loop through your data in app view. JQM will refer as `for 
 **JQM:**
 
 *index.html:*
-```sh
+```html
    <h1 id="fruit-topic"></h1>
    <h2 id="fruit-subtopic"></h2>
    
@@ -92,7 +92,7 @@ ngFor is a method to loop through your data in app view. JQM will refer as `for 
 ```
 
 *index.js:*
-```sh
+```js
       $( document ).ready(function() {
          var title = "My favourite Fruit";
          var fruit = ["Durian", "Apple", "Orange", "Watermelon", "Grape"];
@@ -107,7 +107,7 @@ ngFor is a method to loop through your data in app view. JQM will refer as `for 
 ```
 
 **Ionic:**
-```sh
+```html
 <ion-content>
    <h1>{{title}}</h1>
    <h2>My top favourite is {{favFruit}}!</h2>
@@ -125,7 +125,7 @@ ngFor is a method to loop through your data in app view. JQM will refer as `for 
 ```
 
 Edit it to:
-```sh
+```html
 <ion-content>
    <h1>{{title}}</h1>
    <h2>My top favourite is {{favFruit}}!</h2>
@@ -146,7 +146,7 @@ ngIf is a method to display a view or a portion of a view only under specific ci
 **JQM:**
 
 *index.html:*
-```sh
+```html
    <h1 id="fruit-topic"></h1>
    <h2 id="fruit-subtopic"></h2>
    
@@ -157,7 +157,7 @@ ngIf is a method to display a view or a portion of a view only under specific ci
 ```
 
 *index.js:*
-```sh
+```js
       $( document ).ready(function() {
          var title = "My favourite Fruit";
          var fruit = ["Durian", "Apple", "Orange", "Watermelon", "Grape"];
@@ -175,7 +175,7 @@ ngIf is a method to display a view or a portion of a view only under specific ci
 ```
    
 **Ionic:**
-```sh
+```html
 <ion-content>
    <h1>{{title}}</h1>
    <h2>My top favourite is {{favFruit}}!</h2>
@@ -201,7 +201,7 @@ Ngmodel is use for one way data binding from controller to model of an app. JQM 
 **JQM:**
 
 *index.html:*
-```sh
+```html
 <label for="text-basic">Username:</label>
 <input name="text-basic" id="text-basic" value="someUsername" type="text">
 
@@ -220,7 +220,7 @@ Ngmodel is use for one way data binding from controller to model of an app. JQM 
 ```
 
 *index.js:*
-```sh
+```js
       $( document ).ready(function() {
         var username = $('#text-basic').val(); 
         var password = $('#password').val(); 
@@ -237,7 +237,7 @@ Ngmodel is use for one way data binding from controller to model of an app. JQM 
 **Ionic:**
 
 *home.html:*
-```sh
+```html
      <ion-label>Username:</ion-label>
     <ion-input type="text" [ngModel]="username">someUsername</ion-input>
     
@@ -256,7 +256,7 @@ Ngmodel is use for one way data binding from controller to model of an app. JQM 
 ```
 
 *home.ts*
-```sh
+```ts
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
