@@ -6,7 +6,7 @@
 
 ## <a name="mobileinit">MobileInit
 **JQM:**
-```sh
+```typescript
 $( document ).on( "mobileinit", function() {
 	// init something here
 });
