@@ -390,7 +390,7 @@ constructor(private camera: Camera) { }
   correctOrientation: true
 }
 
-
+// Android 
 openCamera(){
 this.camera.getPicture(this.options).then((imageUri) => {
  this.imageFile = imageUri; 
@@ -400,6 +400,18 @@ this.camera.getPicture(this.options).then((imageUri) => {
  console.log('take photo error ') + err;
 });
 }
+
+//ios
+openCamera(){
+this.camera.getPicture(this.options).then((imageUri) => {
+ this.imageFile = imageUri.replace(/^file:\/\//, '');
+
+}, (err) => {
+ 
+ console.log('take photo error ') + err;
+});
+}
+
 
 openLibrary(){
   var options = {
@@ -428,8 +440,6 @@ openLibrary(){
 
 *Creating a new persistent file:*
 ```js
-
-
 function createFile(){
 window.requestFileSystem(window.PERSISTENT, 0, function (fs) {
 
