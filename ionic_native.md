@@ -440,13 +440,14 @@ openLibrary(){
 
 *Creating a new persistent file:*
 ```js
+
 function createFile(){
-window.requestFileSystem(window.PERSISTENT, 0, function (fs) {
+    var path = cordova.file.dataDirectory;
 
-    console.log('file system open: ' + fs.name);
-    fs.root.getFile("somePesistentFile.txt", { create: true, exclusive: false }, function (fileEntry) {
+window.resolveLocalFileSystemURL(path,function(fs) {
+
+    fs.getFile("someFile.txt", { create: true, exclusive: false }, function (fileEntry) {
         
-
         console.log(fileEntry.fullPath);
         // fileEntry.name == 'someFile.txt'
         // fileEntry.fullPath == '/someFile.txt'
@@ -457,54 +458,41 @@ window.requestFileSystem(window.PERSISTENT, 0, function (fs) {
 
 }
 
-
-function createTempFile(){
-    window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (fs) {
-
-        console.log('file system open: ' + fs.name);
-
-    fs.root.getFile('someTempFile.txt', {create: true, exclusive: true}, function(fileEntry) {
-        console.log(fileEntry.fullPath);
-
-    }, onErrorGetFile);
-
-}, onErrorLoadFs);
-
-
-}
-
-
 function writeFile(fileEntry, dataObj, isAppend) {
-
-   window.requestFileSystem(window.TEMPORARY, 5*1024*1024, function(fs){
-
-      fs.root.getFile('someTempFile.txt',{create:false}, function(fileEntry) {
-
-         fileEntry.createWriter(function(fileWriter) {
-            fileWriter.onwriteend = function(e) {
-               console.log('Write completed.');
-            };
-
-            fileWriter.onerror = function(e) {
-               console.log('Write failed: ' + e.toString());
-            };
-
-            var blob = new Blob(['Lorem Ipsum'], {type: 'text/plain'});
-            fileWriter.write(blob);
-
-         }, onErrorWriteFile);
-
-      }, onErrorGetFile);
-
-   }, onErrorLoadFs);
-
-}
-
+    
+    var path = cordova.file.dataDirectory;
+    
+    window.resolveLocalFileSystemURL(path, function(fs){
+    
+          fs.getFile('someFile.txt',{create:false}, function(fileEntry) {
+    
+             fileEntry.createWriter(function(fileWriter) {
+                fileWriter.onwriteend = function(e) {
+                   console.log('Write completed.');
+                };
+    
+                fileWriter.onerror = function(e) {
+                   console.log('Write failed: ' + e.toString());
+                };
+    
+                var blob = new Blob(['Lorem Ipsum'], {type: 'text/plain'});
+                fileWriter.write(blob);
+    
+             }, onErrorWriteFile);
+    
+          }, onErrorGetFile);
+    
+       }, onErrorLoadFs);
+    
+    }
+    
 
 function readFile() {
 
-   window.requestFileSystem(window.TEMPORARY, 5*1024*1024, function(fs){
-      fs.root.getFile('someTempFile.txt', {}, function(fileEntry) {
+    var path = cordova.file.dataDirectory;
+
+    window.resolveLocalFileSystemURL(path, function(fs){
+      fs.getFile('someFile.txt', {}, function(fileEntry) {
 
          fileEntry.file(function(file) {
             var reader = new FileReader();
@@ -526,25 +514,29 @@ function readFile() {
 
 function removeFile() {
 
-   window.requestFileSystem(window.TEMPORARY, 5*1024*1024, function(fs){
-
-      fs.root.getFile('someTempFile.txt', {create: false}, function(fileEntry) {
-
-         fileEntry.remove(function() {
-            console.log('File removed.');
-
-         }, onErrorDeleteFile);
-
-      }, onErrorGetFile);
-
-   }, onErrorLoadFs);
-}   
-
-
+    var path = cordova.file.dataDirectory;
+    
+    window.resolveLocalFileSystemURL(path, function(fs){
+    
+          fs.getFile('someFile.txt', {create: false}, function(fileEntry) {
+    
+             fileEntry.remove(function() {
+                console.log('File removed.');
+    
+             }, onErrorDeleteFile);
+    
+          }, onErrorGetFile);
+    
+       }, onErrorLoadFs);
+    }   
+    
 
     function createDirectory(rootDirEntry) {
-    window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (rootDirEntry) {        
-    rootDirEntry.root.getDirectory('NewDirInRoot', { create: true }, function (dirEntry) {
+    
+        var path = cordova.file.dataDirectory;
+
+    window.resolveLocalFileSystemURL(path, function(rootDirEntry) {        
+    rootDirEntry.getDirectory('NewDirInRoot', { create: true }, function (dirEntry) {
         dirEntry.getDirectory('subDir', { create: true }, function (subDirEntry) {
 
             console.log('directory created' + dirEntry.fullPath);
@@ -553,7 +545,6 @@ function removeFile() {
     });
     });
 }
-
 
 var onErrorGetFile = function(err){
     console.log('get file error:' + err.code);
@@ -574,6 +565,8 @@ var onErrorReadFile = function(err){
 var onErrorDeleteFile = function(err){
     console.log('delete file error:' + err.code);
 }
+
+
 
 ```
 
@@ -613,7 +606,7 @@ export class HomePage {
 
 createFile(){
 
-  let path = this.file.externalRootDirectory;
+  let path = this.file.dataDirectory;
   let fileName = 'someFile.txt';
   let isAppend = true;
   // true replace file with same name, false returns error
@@ -626,7 +619,7 @@ createFile(){
 
 writeFile(){
 
-  let path = this.file.externalRootDirectory;
+  let path = this.file.dataDirectory;
   let fileName = 'someFile.txt';
   let textContent = 'Lorem Ipsum';
   let text = new Blob([textContent],{type:'text/plain'});
@@ -638,7 +631,7 @@ writeFile(){
 
 readFile(){
 
-  let path = this.file.externalRootDirectory;
+  let path = this.file.dataDirectory;
   let fileName = 'someFile.txt';
 
 
@@ -650,7 +643,7 @@ readFile(){
 
 removeFile(){
 
-  let path = this.file.externalRootDirectory;
+  let path = this.file.dataDirectory;
   let fileName = 'someFile.txt';
 
   this.file.removeFile(path,fileName)
@@ -661,7 +654,7 @@ removeFile(){
 
 createDir(){
 
-  let path = this.file.externalRootDirectory;
+  let path = this.file.dataDirectory;
   let dirName = 'ionicFile';
   let replace = true;
 
