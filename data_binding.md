@@ -224,7 +224,7 @@ Ngmodel is use for one way data binding from controller to model of an app. JQM 
       $( document ).ready(function() {
         var username = $('#text-basic').val(); 
         var password = $('#password').val(); 
-        var textArea = $('#textarea).val(); 
+        var textArea = $('#textarea').val(); 
         var unit = $('#select').val(); 
 
         console.log(username); //someUsername
