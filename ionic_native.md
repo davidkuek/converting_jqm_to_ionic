@@ -436,9 +436,9 @@ openLibrary(){
 <a href="#top">Back to top</a>
 
 ## <a name="file">File
+[Different platform file location guide](https://ionicframework.com/docs/native/file/#instance-members)
 **JQM:**
 
-*Creating a new persistent file:*
 ```js
 
 function createFile(){
