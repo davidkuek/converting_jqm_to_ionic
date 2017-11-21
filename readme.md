@@ -16,7 +16,7 @@ Some notes before converting a JQM based project to ionic.
   - A function with no return is called **Void**, you might not need to do anything about it.
 7. Jquery **append** is not working as expected as well, use **ngFor** in Angular.
 8. **InnerHTML** not usable as well since no.3 is not working.
-9. Use code editor with typscript corrector so it will guide along the way.
+9. Use code editor with typscript corrector so it will guide you along the way.
 
 ## Getting started
 1. Before install Ionic, install nodejs and cordova.
