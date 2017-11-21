@@ -15,76 +15,57 @@ var dbDisplayName = 'Test DB';
 var dbSize = 2*1024*1024;
 var item_list = []; 
 
-
+// creating tables
 function createDatabase(){
 var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
 var query = 'CREATE TABLE IF NOT EXISTS ITEM_LIST ' +  
             '([id] INTEGER PRIMARY KEY AUTOINCREMENT, [name] TEXT,[desc] TEXT);';
 
     db.transaction(function(tx){
-
         tx.executeSql(query, [],function(tx,result){
-
             console.log('executed Sql:' + result);
-
         },sqlError);
-
     },dbError);
-
 }
  
-
+// updating item in tables
 function updateItem(id,name,desc){
 var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
 var query = 'UPDATE ITEM_LIST SET NAME = ?, DESC = ? WHERE ID = ?;';
 
     db.transaction(function(tx){
-
         tx.executeSql(query,[name,desc,id],function(tx,result){
-
             console.log('executed sql:' + result);
-
         },sqlError);
-
     },dbError);  
-
 }
 
-
+// delete item in tables
 function deleteItem(id){
 var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
 var query = 'DELETE FROM ITEM_LIST WHERE ID =?;';
 
     db.transaction(function(tx){
-
         tx.executeSql(query,[id],function(tx,result){
-
             console.log('executed sql ' + result);
-
         },sqlError);
-
     },dbError);  
 
 }
 
-
+// adding  item in tables
 function addItem(name,desc){
 var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
 var query = 'INSERT INTO ITEM_LIST(name,desc) VALUES (?,?);';
 
     db.transaction(function(tx){
-
         tx.executeSql(query,[name,desc],function(tx,result){
-
             console.log('executed sql ' + result);
-
         },sqlError);
-
     },dbError);  
-
 }
 
-
+// show table item
  function displayItemList(){
 var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
 var query = "SELECT * FROM ITEM_LIST;";
@@ -107,7 +88,7 @@ var query = "SELECT * FROM ITEM_LIST;";
     },dbError);
 }
 
-
+// error handler
 var sqlError = function(err){
     console.log('sql executed error:' + err);
 }
@@ -119,13 +100,20 @@ var dbError = function(err){
  
 **Ionic:**
 
-*Install plugin:*
- ```sh
+
+*Note: Sqlite in Ionic is not websql in JQM, therefore is not viewable in debug tools.*
+
+*Note: Sqlite usage may cause your app not viewable with `ionic serve`, therefore view your app device instead.*
+
+Steps before using:
+
+1. *Install plugin:*
+```sh
 $ ionic cordova plugin add cordova-sqlite-storage
 $ npm install --save @ionic-native/sqlite
- ```
+```
  
-*app.module.ts:*
+2. *app.module.ts:*
 ```ts
  ...
 
@@ -146,9 +134,9 @@ import { SQLite } from '@ionic-native/sqlite';
 export class AppModule { }
 ```
 
-*home.ts:*
+3. *home.ts:*
 ```ts
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite'; //import this
 
 @Component({
   selector: 'page-home',
@@ -158,10 +146,11 @@ export class HomePage {
 
   item_list = [];
 
-  constructor(private sqlite: SQLite) {
+  constructor(private sqlite: SQLite) { // inject this
 
   }
 
+// creating tables
 createDatabase(){
 this.sqlite.create({
   name: 'Test.db',
@@ -181,6 +170,7 @@ this.sqlite.create({
   }
 
 
+// updating item in tables
 updateItem(id,name,desc){
 this.sqlite.create({
   name: 'Test.db',
@@ -197,7 +187,7 @@ this.sqlite.create({
   .catch(e=>console.log('sqlite update error' + e));
 }
 
-
+// deleting item in tables
 deleteItem(id){
 this.sqlite.create({
   name: 'Test.db',
@@ -215,7 +205,7 @@ this.sqlite.create({
 }
 
 
-
+// adding item in tables
 addItem(name,desc){
 this.sqlite.create({
   name: 'Test.db',
@@ -232,7 +222,7 @@ this.sqlite.create({
   .catch(e=>console.log('sqlite update error' + e));
 }
 
-
+// show data from tables
  displayItem(){
       this.sqlite.create({
         name: 'Test.db',
@@ -263,10 +253,6 @@ this.sqlite.create({
   }
 }
 ```
- 
-*Note: Sqlite in Ionic is not websql in JQM, therefore is not viewable in debug tools.*
-
-*Note: Sqlite usage may cause your app not viewable with `ionic serve`, therefore view your app device instead.*
 
 [Ionic SQLite Docs](https://ionicframework.com/docs/native/sqlite/)
 
@@ -280,6 +266,7 @@ this.sqlite.create({
 <img src="" id="imageFile">
 
 <script>
+// camera options
 function setOptions(srcType) {
     var options = {
         // Some common settings are 20, 50, and 100
@@ -294,6 +281,7 @@ function setOptions(srcType) {
     return options;
 }
 
+// take photo with camera
 function openCamera(selection) {
 
     var srcType = Camera.PictureSourceType.CAMERA;
@@ -309,7 +297,7 @@ function openCamera(selection) {
     }, options);
 }
 
-
+// choose photo from album
 function openLibrary(selection) {
 
     var srcType = Camera.PictureSourceType.SAVEDPHOTOALBUM;
@@ -325,6 +313,7 @@ function openLibrary(selection) {
     }, options);
 }
 
+// displaying image on view
 function displayImage(imageUri) {
 
     var elem = document.getElementById('imageFile');
@@ -334,13 +323,16 @@ function displayImage(imageUri) {
 ```
 
 **Ionic:**
-*Install the camera plugin:*
+
+Steps before using:
+
+1. *Install the camera plugin:*
 ```sh
 $ ionic cordova plugin add cordova-plugin-camera
 $ npm install --save @ionic-native/camera
 ```
 
-*app.module.ts:*
+2. *app.module.ts:*
 ```ts
 ...
 
@@ -362,14 +354,14 @@ export class AppModule { }
 
 ```
 
-*home.html:*
+3. *home.html:*
 ```html
   <ion-content padding>
     <img src="{{imageFile}}">
   </ion-content>
 ```
 
-*home.ts:*
+4. *home.ts:*
 ```ts
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
@@ -381,6 +373,8 @@ imageFile: any;
 constructor(private camera: Camera) { }
 
 ...
+
+// setting options
  options: CameraOptions = {
   quality: 100,
   destinationType: this.camera.DestinationType.FILE_URI,
@@ -390,7 +384,7 @@ constructor(private camera: Camera) { }
   correctOrientation: true
 }
 
-// Android 
+// Android take photo
 openCamera(){
 this.camera.getPicture(this.options).then((imageUri) => {
  this.imageFile = imageUri; 
@@ -401,7 +395,7 @@ this.camera.getPicture(this.options).then((imageUri) => {
 });
 }
 
-//ios
+//ios take photo
 openCamera(){
 this.camera.getPicture(this.options).then((imageUri) => {
  this.imageFile = imageUri.replace(/^file:\/\//, '');
@@ -412,12 +406,11 @@ this.camera.getPicture(this.options).then((imageUri) => {
 });
 }
 
-
+// choose photo from library
 openLibrary(){
   var options = {
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    // use data_url instead of file_uri for image display from library
+    destinationType: this.camera.DestinationType.DATA_URL, // use data_url instead of file_uri for image display from library
     mediaType: this.camera.MediaType.PICTURE
   };
   this.camera.getPicture(options).then((imageData) =>{
@@ -437,10 +430,11 @@ openLibrary(){
 
 ## <a name="file">File
 [Different platform file location guide](https://ionicframework.com/docs/native/file/#instance-members)
+
 **JQM:**
 
 ```js
-
+// creating file
 function createFile(){
     var path = cordova.file.dataDirectory;
 
@@ -449,8 +443,6 @@ window.resolveLocalFileSystemURL(path,function(fs) {
     fs.getFile("someFile.txt", { create: true, exclusive: false }, function (fileEntry) {
         
         console.log(fileEntry.fullPath);
-        // fileEntry.name == 'someFile.txt'
-        // fileEntry.fullPath == '/someFile.txt'
         
     }, onErrorGetFile);
 
@@ -458,6 +450,7 @@ window.resolveLocalFileSystemURL(path,function(fs) {
 
 }
 
+// write content in file
 function writeFile(fileEntry, dataObj, isAppend) {
     
     var path = cordova.file.dataDirectory;
@@ -486,7 +479,7 @@ function writeFile(fileEntry, dataObj, isAppend) {
     
     }
     
-
+// display content from file
 function readFile() {
 
     var path = cordova.file.dataDirectory;
@@ -511,7 +504,7 @@ function readFile() {
 
 }
 
-
+// delete file
 function removeFile() {
 
     var path = cordova.file.dataDirectory;
@@ -530,20 +523,20 @@ function removeFile() {
        }, onErrorLoadFs);
     }   
     
+// create folder
+function createDirectory(rootDirEntry) {
 
-    function createDirectory(rootDirEntry) {
-    
-        var path = cordova.file.dataDirectory;
+    var path = cordova.file.dataDirectory;
 
-    window.resolveLocalFileSystemURL(path, function(rootDirEntry) {        
-    rootDirEntry.getDirectory('NewDirInRoot', { create: true }, function (dirEntry) {
-        dirEntry.getDirectory('subDir', { create: true }, function (subDirEntry) {
+window.resolveLocalFileSystemURL(path, function(rootDirEntry) {        
+rootDirEntry.getDirectory('NewDirInRoot', { create: true }, function (dirEntry) {
+    dirEntry.getDirectory('subDir', { create: true }, function (subDirEntry) {
 
-            console.log('directory created' + dirEntry.fullPath);
+        console.log('directory created' + dirEntry.fullPath);
 
-        });
     });
-    });
+});
+});
 }
 
 var onErrorGetFile = function(err){
@@ -604,6 +597,7 @@ export class HomePage {
 
   }
 
+// create file
 createFile(){
 
   let path = this.file.dataDirectory;
@@ -616,7 +610,7 @@ createFile(){
   .catch(err => console.log(err))
   }
 
-
+// write content into file
 writeFile(){
 
   let path = this.file.dataDirectory;
@@ -629,6 +623,7 @@ writeFile(){
   .catch(err => console.log(err))
 }
 
+// display content from file
 readFile(){
 
   let path = this.file.dataDirectory;
@@ -641,6 +636,7 @@ readFile(){
 
 }
 
+// delete file
 removeFile(){
 
   let path = this.file.dataDirectory;
@@ -651,7 +647,7 @@ removeFile(){
   .catch(err => console.log(err))
 }
 
-
+// create folder
 createDir(){
 
   let path = this.file.dataDirectory;
@@ -705,18 +701,19 @@ var onError = function(error) {
           'message: ' + error.message + '\n');
 }
 
-
+// get current location
 function getPosition(){
  navigator.geolocation.getCurrentPosition(getPositionSuccess, onError);
 
   }
 
-
+// update location every specifiy seconds
 function watchPosition(watchID){
     window.watchID = navigator.geolocation.watchPosition(watchPositionSuccess, onError, { timeout: 30000 });
 
 }
 
+// clear timeout
 function clearWatchPosition(watchID){
   navigator.geolocation.clearWatch(window.watchID);
 }
@@ -771,6 +768,7 @@ export class HomePage {
 
   }
 
+// get current position
 getPosition(){
   this.geolocation.getCurrentPosition().then((position) => {
 
@@ -789,6 +787,7 @@ getPosition(){
   });
 }
 
+// update position every specific timeout
 watchPosition(){
   this.subscription = this.geolocation.watchPosition({timeout:30000})
                               .filter((p) => p.coords !== undefined) //Filter Out Errors
@@ -808,6 +807,7 @@ watchPosition(){
                               
 }
 
+// stop timeout
 stopWatchPosition(){
 // To stop notifications
 this.subscription.unsubscribe()

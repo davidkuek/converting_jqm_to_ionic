@@ -38,7 +38,7 @@ After installed Ionic,
 
 3. Open your project folder with code editor and open the home folder (located in `/src/pages/home`).
 
-The folder is your home page and it consists:
-- home.html *(app framework)*
-- home.scss *(app styling and theming)*
-- home.ts  *(app function and logic)*
+    The folder is your home page and it consists:
+    - home.html *(app framework)*
+    - home.scss *(app styling and theming)*
+    - home.ts  *(app function and logic)*
