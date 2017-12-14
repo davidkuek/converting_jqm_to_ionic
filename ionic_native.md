@@ -1,12 +1,193 @@
 # Ionic Native
 Usage of phone functions, please have cordova installed before proceed. 
 
-- [SQLite database](#sqlite)
+- [Web SQL](#websql)
 - [Camera](#camera)
 - [File](#file)
 - [Geolocation](#geolocation)
 
-## <a name="sqlite">Sqlite database
+## <a name="websql">Web SQL
+**JQM:**
+```js
+var dbName = 'Testdb';
+var dbVersion = '1.0';
+var dbDisplayName = 'Test DB';
+var dbSize = 2*1024*1024;
+var item_list = []; 
+
+// creating tables
+function createDatabase(){
+var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
+var query = 'CREATE TABLE IF NOT EXISTS ITEM_LIST ' +  
+            '([id] INTEGER PRIMARY KEY AUTOINCREMENT, [name] TEXT,[desc] TEXT);';
+
+    db.transaction(function(tx){
+        tx.executeSql(query, [],function(tx,result){
+            console.log('executed Sql:' + result);
+        },sqlError);
+    },dbError);
+}
+ 
+// updating item in tables
+function updateItem(id,name,desc){
+var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
+var query = 'UPDATE ITEM_LIST SET NAME = ?, DESC = ? WHERE ID = ?;';
+
+    db.transaction(function(tx){
+        tx.executeSql(query,[name,desc,id],function(tx,result){
+            console.log('executed sql:' + result);
+        },sqlError);
+    },dbError);  
+}
+
+// delete item in tables
+function deleteItem(id){
+var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
+var query = 'DELETE FROM ITEM_LIST WHERE ID =?;';
+
+    db.transaction(function(tx){
+        tx.executeSql(query,[id],function(tx,result){
+            console.log('executed sql ' + result);
+        },sqlError);
+    },dbError);  
+
+}
+
+// adding  item in tables
+function addItem(name,desc){
+var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
+var query = 'INSERT INTO ITEM_LIST(name,desc) VALUES (?,?);';
+
+    db.transaction(function(tx){
+        tx.executeSql(query,[name,desc],function(tx,result){
+            console.log('executed sql ' + result);
+        },sqlError);
+    },dbError);  
+}
+
+// show table item
+ function displayItemList(){
+var db = window.openDatabase(dbName, dbVersion, dbDisplayName, dbSize);
+var query = "SELECT * FROM ITEM_LIST;";
+    db.transaction(function (tx){
+        tx.executeSql(query,[],
+            function(tx,results){
+                if (results.rows.length > 0) {
+                    for(var i=0; i < results.rows.length; i++){
+                        item_list[i] = [];
+                        item_list[i][0] = results.rows.item(i).id;
+                        item_list[i][1] = results.rows.item(i).name;
+                        item_list[i][2] = results.rows.item(i).desc;                            
+                    }
+
+                    console.log(item_list);
+                } 
+                              
+            },sqlError);
+
+    },dbError);
+}
+
+// error handler
+var sqlError = function(err){
+    console.log('sql executed error:' + err);
+}
+
+var dbError = function(err){
+    console.log('db transaction error:' + err);
+}
+```
+
+
+**Ionic:**
+```ts
+import { Component } from '@angular/core';
+import { NavController, Platform } from 'ionic-angular';
+
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage {
+
+db = (<any>window).openDatabase('test','1.0','testDb',1*1024*1024);
+
+  constructor(public navCtrl: NavController, public platform: Platform) {
+
+  }
+
+  // creating tables
+  createDatabase(){
+  let query = 'CREATE TABLE IF NOT EXISTS ITEM_LIST ' +  
+              '([id] INTEGER PRIMARY KEY AUTOINCREMENT, [name] TEXT,[desc] TEXT);';
+      this.db.transaction((tx)=>{
+          tx.executeSql(query, [],(tx,result)=>{
+              console.log('executed Sql:' + result);
+          },err=>this.sqlError(err));
+      },=>this.dbError(err));
+  }
+
+  // updating item in tables
+  updateItem(id,name,desc){
+  let query = 'UPDATE ITEM_LIST SET NAME = ?, DESC = ? WHERE ID = ?;';
+     this.db.transaction((tx)=>{
+          tx.executeSql(query,[name,desc,id],(tx,result)=>{
+              console.log('executed sql:' + result);
+          },err=>this.sqlError(err));
+      },err=>this.dbError(err));  
+  }
+
+  // delete item in tables
+  deleteItem(id){
+  let query = 'DELETE FROM ITEM_LIST WHERE ID =?;';
+      this.db.transaction((tx)=>{
+          tx.executeSql(query,[id],(tx,result)=>{
+              console.log('executed sql ' + result);
+          },err=>this.sqlError(err));
+      },err=>this.dbError(err));  
+  }
+
+  // adding  item in tables
+  addItem(name,desc){
+  let query = 'INSERT INTO ITEM_LIST(name,desc) VALUES (?,?);';
+      this.db.transaction((tx)=>{
+          tx.executeSql(query,[name,desc],(tx,result)=>{
+              console.log('executed sql ' + result);
+          },err=>this.sqlError(err));
+      },err=>this.dbError(err));  
+  }
+
+  // show table item
+  displayItemList(){
+  let item_list = [];
+  let query = "SELECT * FROM ITEM_LIST;";
+      this.db.transaction((tx)=>{
+          tx.executeSql(query,[],(tx,results)=>{
+                  if (results.rows.length > 0) {
+                      for(var i=0; i < results.rows.length; i++){
+                          item_list[i] = [];
+                          item_list[i][0] = results.rows.item(i).name;
+                          item_list[i][1] = results.rows.item(i).desc;                            
+                      }
+                      console.log(item_list);
+                  }                        
+              },err=>this.sqlError(err));
+      },err=>this.dbError(err));
+  }
+
+// error handler
+sqlError(err){
+    console.log('sql executed error:' + err);
+}
+
+dbError(err){
+    console.log('db transaction error:' + err);
+}
+
+}
+
+```
+<!-- ## <a name="sqlite">Sqlite database
 **JQM:**
  ```js
 var dbName = 'Testdb';
@@ -255,7 +436,7 @@ this.sqlite.create({
 ```
 
 [Ionic SQLite Docs](https://ionicframework.com/docs/native/sqlite/)
-
+ -->
 <a href="#top">Back to top</a>
 
   
@@ -822,3 +1003,15 @@ this.subscription.unsubscribe()
 More Ionic Native content: [Ionic Native docs](https://ionicframework.com/docs/native/)
 
 <a href="#top">Back to top</a>
+
+## <a name="background-service">Background services
+Plugin for controlling android phone background services.
+
+**Ionic:**
+
+Install the plugin:
+```sh
+$ ionic cordova plugin add https://github.com/Red-Folder/bgs-sample.git
+```
+
+
