@@ -5,6 +5,7 @@ Usage of phone functions, please have cordova installed before proceed.
 - [Camera](#camera)
 - [File](#file)
 - [Geolocation](#geolocation)
+- [Background service](#background-service)
 
 ## <a name="websql">Web SQL
 **JQM:**
