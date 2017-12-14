@@ -1014,4 +1014,126 @@ Install the plugin:
 $ ionic cordova plugin add https://github.com/Red-Folder/bgs-sample.git
 ```
 
+Bind the data to home.html to see the string:
+```html
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
+<ion-content padding>
+<h1>{{data}}</h1>
+</ion-content>
+```
+
+home.ts:
+```ts
+import { Component } from '@angular/core';
+import { NavController, Platform } from 'ionic-angular';
+
+declare var cordova : any;
+
+
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+
+export class HomePage {
+
+myService: any;
+data: any;
+
+  constructor(public navCtrl: NavController, public platform : Platform) {
+    this.platform.ready().then(()=>{
+      let serviceName = 'com.red_folder.phonegap.plugin.backgroundservice.sample.MyService';
+      let factory =  cordova.require('com.red_folder.phonegap.plugin.backgroundservice.BackgroundService');
+      this.myService = factory.create(serviceName);
+
+      // this.getStatus();
+      this.go();
+    })
+  } 
+
+
+  getStatus(){
+    this.myService.getStatus((res)=>{
+      this.displayResult(res);
+      console.log(res)
+    }, err=>this.displayError(err))
+  }
+
+  displayResult(data){
+    alert("Is service running: " + data.ServiceRunning);
+  }
+
+
+
+  displayError(data){
+    alert("We have an error");
+  }
+
+
+  updateHandler(data){
+    if(data.LatestResult != null){
+      try{
+        this.data = data.LatestResult.Message;
+        
+      }
+      catch(err){
+        console.log(err);
+      }
+    }
+  }
+
+  go(){
+    this.myService.getStatus((res)=>{
+      this.startService(res);
+    }, err=>console.log(err));
+  }
+
+  startService(data){
+    if(data.ServiceRunning){
+      this.enableTimer(data);
+    }
+    else{
+      this.myService.startService(()=>{
+        this.myService.startService((res)=>{
+          this.enableTimer(res);
+          this.registerForBootStart(res);
+        },err=>console.log(err));
+      }, err=>console.log(err));
+    }
+  }
+
+  enableTimer(data){
+    if(data.TimerEnabled){
+      this.registerForUpdates(data);
+    }
+    else{
+      this.myService.enableTimer((res)=>{
+        this.registerForUpdates(res);
+      }, err=>this.displayError(err),60000);
+    }
+  }
+
+  registerForUpdates(data){
+    if(!data.RegisteredForUpdates){
+      this.myService.registerForUpdates((res)=>{
+        this.updateHandler(res);
+      }, err=>this.displayError(err));
+    }
+  }
+
+  registerForBootStart(data){
+    this.myService.registerForBootStart((res)=>{
+      console.log(res);
+    },err=>console.log(err));
+  }
+
+}
+
+```
